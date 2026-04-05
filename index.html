@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siya Collection | Handcrafted Fashion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>	
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 2px;
+        }
+        .page-transition {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <button onclick="toggleMenu(true)" class="p-2 hover:bg-gray-100 rounded-lg transition">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+            <div class="brand-name text-2xl font-bold text-pink-500">
+                SIYA COLLECTION
+            </div>
+            <div class="w-10"></div>
+        </div>
+    </header>
+
+    <div id="menuOverlay" class="fixed inset-0 bg-black/50 z-[60] hidden opacity-0 transition-opacity duration-300" onclick="toggleMenu(false)"></div>
+    <div id="sidebar" class="fixed top-0 left-0 h-full w-72 bg-white z-[70] shadow-2xl transform -translate-x-full sidebar">
+        <div class="p-6 border-b flex justify-between items-center">
+            <span class="font-bold text-lg">Menu</span>
+            <button onclick="toggleMenu(false)"><i class="fa-solid fa-xmark text-xl"></i></button>
+        </div>
+        <nav class="p-4 flex flex-col gap-2">
+            <button onclick="navigateTo('home')" class="flex items-center gap-4 p-4 hover:bg-pink-50 hover:text-pink-600 rounded-xl transition text-left">
+                <i class="fa-solid fa-house w-6"></i> Home Page
+            </button>
+            <button onclick="navigateTo('catalog')" class="flex items-center gap-4 p-4 hover:bg-pink-50 hover:text-pink-600 rounded-xl transition text-left">
+                <i class="fa-solid fa-shirt w-6"></i> Clothing Images
+            </button>
+            <button onclick="navigateTo('payment')" class="flex items-center gap-4 p-4 hover:bg-pink-50 hover:text-pink-600 rounded-xl transition text-left">
+                <i class="fa-solid fa-credit-card w-6"></i> Contact & Payment
+            </button>
+            <button onclick="navigateTo('about')" class="flex items-center gap-4 p-4 hover:bg-pink-50 hover:text-pink-600 rounded-xl transition text-left">
+                <i class="fa-solid fa-circle-info w-6"></i> About Us
+            </button>
+        </nav>
+    </div>
+
+    <main id="mainContent" class="max-w-7xl mx-auto p-4 md:p-8">
+        <div id="page-home" class="page-transition">
+            <section class="mb-8"> 
+<h2 class="text-xl font-bold mb-6 border-l-4 border-pink-500 pl-3">
+    <span class="text-blue-800">Latest Branded Collection</span><br>
+    <span class="text-blue-500">Contact: +91 9834524074</span>
+</h2>            
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="max-w-[280px] mx-auto w-full aspect-[3/4] overflow-hidden rounded-2xl shadow-sm border border-gray-100">
+                        <a href="https://ibb.co/20pMwPkx"><img src="https://i.ibb.co/MyJ1bpCr/Dress-4.jpg" alt="Dress-4" class="w-full h-full object-cover"></a>			
+                    </div>
+                    <div class="max-w-[280px] mx-auto w-full aspect-[3/4] overflow-hidden rounded-2xl shadow-sm border border-gray-100">
+                        <a href="https://ibb.co/9HYgK8Mg"><img src="https://i.ibb.co/23KhVnbh/Dress-7.jpg" alt="Dress-7" class="w-full h-full object-cover"></a>
+                    </div>
+                    <div class="max-w-[280px] mx-auto w-full aspect-[3/4] overflow-hidden rounded-2xl shadow-sm border border-gray-100">
+                        <a href="https://ibb.co/0vj0jJC"><img src="https://i.ibb.co/CD5j50b/Dress-5.jpg" alt="Dress-5" class="w-full h-full object-cover"></a>
+                    </div>
+                </div>
+            </section>
+            <section class="bg-pink-50 p-6 rounded-3xl"> 
+                <h2 class="text-lg font-bold mb-4 text-center">Customer Reviews</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white p-5 rounded-2xl shadow-sm italic text-gray-600 text-sm">
+                        "The fabric quality from SIYA COLLECTION is amazing. It feels so premium!"
+                        <p class="font-bold mt-2 not-italic text-pink-600">- Pooja S.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl shadow-sm italic text-gray-600 text-sm">
+                        "Perfect fit and beautiful designs. Highly recommended for home-grown brands."
+                        <p class="font-bold mt-2 not-italic text-pink-600">- Samruddhi</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="page-catalog" class="page-transition hidden">
+            <h2 class="text-2xl font-bold mb-8 text-center text-gray-700 uppercase tracking-wide">Our Catalog</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto px-2 mb-8">
+                <div class="w-full aspect-[3/4] overflow-hidden rounded-xl border border-gray-100 shadow-sm bg-gray-50">
+                    <a href="https://ibb.co/s98w6hQq"><img src="https://i.ibb.co/60jP12bF/Dress-1.jpg" alt="Dress-1" class="w-full h-full object-cover"></a>
+                </div>
+                <div class="w-full aspect-[3/4] overflow-hidden rounded-xl border border-gray-100 shadow-sm bg-gray-50">
+                    <a href="https://ibb.co/gLsPVRBC"><img src="https://i.ibb.co/ksY91SWF/Dress-3.jpg" alt="Dress-3" class="w-full h-full object-cover"></a>
+                </div>
+                <div class="w-full aspect-[3/4] overflow-hidden rounded-xl border border-gray-100 shadow-sm bg-gray-50">
+                    <a href="https://ibb.co/BHGR6Gtz"><img src="https://i.ibb.co/0pK39KcD/Dress-2.jpg" alt="Dress-2" class="w-full h-full object-cover"></a>
+                </div>
+                <div class="w-full aspect-[3/4] overflow-hidden rounded-xl border border-gray-100 shadow-sm bg-gray-50">
+                    <a href="https://ibb.co/yncLs6tZ"><img src="https://i.ibb.co/JRwXkvVG/Dress-6.jpg" alt="Dress-6" class="w-full h-full object-cover"></a>
+                </div>
+                <div class="w-full aspect-[3/4] overflow-hidden rounded-xl border border-gray-100 shadow-sm bg-gray-50">
+                   <a href="https://ibb.co/7N0nQvZt"><img src="https://i.ibb.co/cXs6wJZh/Dress-8.jpg" alt="Dress 8" border="0"></a>
+                </div>
+                <div class="w-full aspect-[3/4] overflow-hidden rounded-xl border border-gray-100 shadow-sm bg-gray-50">
+                   <a href="https://ibb.co/Sw6981nv"><img src="https://i.ibb.co/1G0w5pq2/Dress-9.jpg" alt="Dress 9" border="0"></a>
+                </div>
+                <div class="w-full aspect-[3/4] overflow-hidden rounded-xl border border-gray-100 shadow-sm bg-gray-50">
+                   <a href="https://ibb.co/Vcb7Jbzc"><img src="https://i.ibb.co/pBNtbNMB/Dress-10.jpg" alt="Dress 10" border="0"></a>
+                </div>
+                <div class="w-full aspect-[3/4] overflow-hidden rounded-xl border border-gray-100 shadow-sm bg-gray-50">
+                  <a href="https://ibb.co/DDZHC31d"><img src="https://i.ibb.co/bgkMBp6t/Dress-11.jpg" alt="Dress 11" border="0"></a> 
+                </div>
+                <div class="w-full aspect-[3/4] overflow-hidden rounded-xl border border-gray-100 shadow-sm bg-gray-50">
+                   <a href="https://ibb.co/QL5KGJf"><img src="https://i.ibb.co/Bb1CRft/Dress-12.jpg" alt="Dress 12" border="0"></a>
+                </div>
+                <div class="w-full aspect-[3/4] overflow-hidden rounded-xl border border-gray-100 shadow-sm bg-gray-50">
+                   <a href="https://ibb.co/99f9MDfp"><img src="https://i.ibb.co/27L7b9LF/Dress-13.jpg" alt="Dress 13" border="0"></a>
+                </div>
+                <div class="w-full aspect-[3/4] overflow-hidden rounded-xl border border-gray-100 shadow-sm bg-gray-50">
+                   <a href="https://ibb.co/JgTt1bD"><img src="https://i.ibb.co/1jNQgpF/Dress-14.jpg" alt="Dress 14" border="0"></a>
+                </div>
+                <div class="w-full aspect-[3/4] overflow-hidden rounded-xl border border-gray-100 shadow-sm bg-gray-50">
+                   <a href="https://ibb.co/jPBvQB0r"><img src="https://i.ibb.co/mV1C21Zc/Soldout.jpg" alt="Soldout" border="0"></a>
+                </div>
+                <div class="w-full aspect-[3/4] overflow-hidden rounded-xl border border-gray-100 shadow-sm bg-gray-50">
+                   <a href="https://ibb.co/jPBvQB0r"><img src="https://i.ibb.co/mV1C21Zc/Soldout.jpg" alt="Soldout" border="0"></a>
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+            <div class="bg-gradient-to-r from-pink-50 to-white p-6 rounded-3xl border border-pink-100 mb-8 text-center shadow-sm max-w-5xl mx-auto">
+                <i class="fa-brands fa-whatsapp text-green-500 text-3xl mb-3"></i>
+                <h2 class="brand-name text-2xl md:text-3xl font-bold text-gray-800 leading-tight">Exclusive New Arrivals</h2>
+                <p class="text-pink-600 font-medium text-sm mt-2 tracking-wide uppercase">Explore our full collection on WhatsApp</p>
+                <a href="https://wa.me/919834524074" class="inline-block mt-4 text-xs font-bold bg-green-500 text-white px-5 py-2 rounded-full shadow-md hover:bg-green-600 transition">View Now</a>
+            </div>
+            <button onclick="navigateTo('home')" class="mt-8 block mx-auto text-pink-600 font-bold hover:text-pink-700 transition">
+                <i class="fa-solid fa-arrow-left mr-2"></i> Back to Home
+            </button>
+        </div>
+
+        <div id="page-payment" class="page-transition hidden">
+            <div class="max-w-md mx-auto bg-white p-6 md:p-8 rounded-3xl shadow-lg border border-gray-100">
+                <h2 class="text-2xl font-bold mb-2 text-center text-gray-800">Contact & Support</h2>
+                <p class="text-pink-500 text-xs font-bold text-center uppercase tracking-widest mb-8">We're here to help</p>
+                <div class="grid grid-cols-2 gap-3 mb-8">
+                    <div class="bg-pink-50 p-3 rounded-2xl text-center border border-pink-100">
+                        <i class="fa-solid fa-truck-fast text-pink-600 mb-2"></i>
+                        <p class="text-[10px] font-bold text-gray-700 leading-tight">Weekend Home Delivery</p>
+                    </div>
+                    <div class="bg-pink-50 p-3 rounded-2xl text-center border border-pink-100">
+                        <i class="fa-solid fa-rotate-left text-pink-600 mb-2"></i>
+                        <p class="text-[10px] font-bold text-gray-700 leading-tight">7 Days Return Option</p>
+                    </div>
+                </div>
+                <div class="mt-8 pt-6 border-t text-center">
+                    <p class="text-xs text-gray-500 mb-4 font-medium uppercase tracking-tighter">Scan to Pay via GPay / PhonePe</p>
+                    <div class="inline-block p-2 bg-gray-100 rounded-2xl border-2 border-dashed border-gray-200 mb-8">
+                        <a href="https://ibb.co/VWh3PbD7"><img src="https://i.ibb.co/VWh3PbD7/Gpay-Siya-Collection.jpg" alt="QR Code" class="w-32 h-32 rounded-xl"></a>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-center p-4 bg-gray-50 rounded-2xl hover:bg-white hover:shadow-md transition">
+                        <div class="flex gap-3 mr-4 text-xl">
+                            <a href="tel:9834524074" class="text-blue-500"><i class="fa-solid fa-phone"></i></a>
+                            <a href="https://wa.me/919834524074" class="text-green-500"><i class="fa-brands fa-whatsapp"></i></a>
+                        </div>
+                        <div>
+                            <p class="text-[10px] uppercase font-bold text-gray-400">Call / WhatsApp</p>
+                            <p class="text-lg font-bold text-gray-800">9834524074</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-4 bg-gray-50 rounded-2xl hover:bg-white hover:shadow-md transition">
+                        <i class="fa-brands fa-instagram text-pink-500 text-xl mr-5"></i>
+                        <div>
+                            <p class="text-[10px] uppercase font-bold text-gray-400">Follow Us</p>
+                            <a href="https://instagram.com/Siya.collection2026" target="_blank" class="text-sm font-bold text-gray-800">@Siya.collection2026</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-4 bg-gray-50 rounded-2xl hover:bg-white hover:shadow-md transition">
+                        <i class="fa-solid fa-envelope text-red-400 text-xl mr-5"></i>
+                        <div class="overflow-hidden">
+                            <p class="text-[10px] uppercase font-bold text-gray-400">Customer Care Email</p>
+                            <a href="mailto:siya.collection2026@gmail.com" class="text-sm font-bold text-gray-800 truncate block">siya.collection2026@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-about" class="page-transition hidden">
+            <div class="max-w-6xl mx-auto text-center py-12 bg-white rounded-3xl shadow-sm">
+                <div class="h-1 w-20 bg-pink-200 mx-auto mb-8"></div>
+                <section class="mb-16 px-6">
+                    <h3 class="text-xs uppercase text-gray-500 font-bold tracking-widest mb-10">Our Leadership Team</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                        <div class="flex flex-col items-center">
+                            <div class="w-40 mx-auto aspect-[3/4] bg-gray-100 mb-4 overflow-hidden rounded-xl border border-pink-100 shadow-sm">
+                                <a href="https://ibb.co/HDg54KRG"><img src="https://i.ibb.co/Fb7R3hc8/Pallavi-Pic.png" alt="Pallavi Pic" border="0"></a>
+                            </div>
+                            <h4 class="font-bold text-gray-800 text-sm uppercase">Miss Pallavi Pradhan</h4>
+                            <p class="text-pink-600 text-xs font-semibold tracking-wide mt-1">Co-Founder</p>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-40 mx-auto aspect-[3/4] bg-gray-100 mb-4 overflow-hidden rounded-xl border border-pink-100 shadow-sm">
+                                <a href="https://ibb.co/p9sz1qw"><img src="https://i.ibb.co/Zkw8f9X/Ruplekha-pic.jpg" alt="Ruplekha pic" border="0"></a>
+                            </div>
+                            <h4 class="font-bold text-gray-800 text-sm uppercase">Mrs. Ruplekha Gaikwad</h4>
+                            <p class="text-pink-600 text-xs font-semibold tracking-wide mt-1">Co-Founder</p>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-40 mx-auto aspect-[3/4] bg-gray-100 mb-4 overflow-hidden rounded-xl border border-pink-100 shadow-sm">
+                                <a href="https://ibb.co/hRhBvDXW"><img src="https://i.ibb.co/6RVH5gvP/Neha-Pic.jpg" alt="Neha Pic" border="0"></a>
+                            </div>
+                            <h4 class="font-bold text-gray-800 text-sm uppercase">Miss Neha Pradhan</h4>
+                            <p class="text-pink-600 text-xs font-semibold tracking-wide mt-1">Co-Founder</p>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-40 mx-auto aspect-[3/4] bg-gray-100 mb-4 overflow-hidden rounded-xl border border-pink-100 shadow-sm">
+                                <a href="https://ibb.co/Wvs6nF5B"><img src="https://i.ibb.co/XxVbXpLF/Nitesh-Pic.jpg" alt="Nitesh-Pic" border="0"></a>
+                            </div>
+                            <h4 class="font-bold text-gray-800 text-sm uppercase">Mr. Nitesh Gaikwad</h4>
+                            <p class="text-pink-600 text-xs font-semibold tracking-wide mt-1">IT Head</p>
+                        </div>
+                    </div>
+                </section>
+                <div class="h-px w-full bg-gray-100 mb-6"></div> 
+                <div class="space-y-2 pb-8"> 
+                    <p class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Our Location</p>
+                    <p class="text-lg text-pink-600 px-6 leading-relaxed"><span class="font-bold">SIYA COLLECTION</span></p>
+                    <p class="text-lg text-gray-800 px-6 leading-relaxed"> 
+                        K.K. Kudale Complex, Tapovan Mandir road,<br>
+                        Opp. Vaibhav Nagar, 411017<br>
+                        Pimpri.<br>
+                        Mobile: +91 9834524074
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-gray-100 mt-12">
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-center md:text-left">
+                    <p class="brand-name text-pink-500 font-bold text-lg">SIYA COLLECTION</p>
+                    <p class="text-xs text-gray-400 mt-1">© 2026 All Rights Reserved.</p>
+                </div>
+                
+                <div class="text-center bg-gray-50 px-6 py-3 rounded-2xl border border-gray-100">
+                    <p class="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-1">Technical Credits</p>
+                    <p class="text-xs font-semibold text-gray-600">
+                        Website developed and maintained by <span class="text-pink-600">Nitesh Gaikwad</span>
+                    </p>
+                </div>
+
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-gray-400 hover:text-pink-500 transition text-sm flex items-center gap-2">
+                    Back to Top <i class="fa-solid fa-arrow-up"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu(show) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('menuOverlay');
+            if (show) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.add('opacity-100'), 10);
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.remove('opacity-100');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            }
+        }
+
+        function navigateTo(pageId) {
+            toggleMenu(false);
+            if (pageId === 'home' && !document.getElementById('page-home').classList.contains('hidden')) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+            const pages = ['home', 'catalog', 'payment', 'about'];
+            pages.forEach(p => {
+                document.getElementById(`page-${p}`).classList.add('hidden');
+            });
+            document.getElementById(`page-${pageId}`).classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
