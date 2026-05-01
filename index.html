@@ -1,86 +1,679 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta property="og:title" content="Siya Collection | Handcrafted Fashion">
+<meta property="og:description" content="Latest Branded Collection starting from Rs. 200. Shop our latest designs now!">
+<meta property="og:image" content="https://i.ibb.co/MyJ1bpCr/Dress-4.jpg">
+<meta property="og:url" content="https://www.siyacollection2026.in">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siya Collection | Coming Soon</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+    <title>Siya Collection | Handcrafted Fashion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>	
+
+       @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
         
-        body {
-            font-family: 'serif', 'Playfair Display', serif;
-            background: #fdfaf6; /* Soft cream background */
-            color: #2c2c2c;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.95; transform: scale(1.02); }
         }
 
-        .container {
-            text-align: center;
-            animation: fadeIn 2s ease-in;
-            padding: 20px;
+        .animate-pulse-slow { animation: pulse-slow 4s infinite ease-in-out; }
+        .brand-name-fashion { font-family: 'Playfair Display', serif; text-shadow: 1px 1px 2px rgba(255, 182, 193, 0.3); }
+        body { font-family: 'Poppins', sans-serif; background-color: #ffffff; display: flex; flex-direction: column; min-height: 100vh; scroll-behavior: smooth; }
+        .brand-name { font-family: 'Playfair Display', serif; letter-spacing: 2px; }
+        .page-transition { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .sidebar { transition: transform 0.3s ease-in-out; }
+        main { flex: 1; }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
         }
+        .animate-bounce-in { animation: bounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .slider-container { position: relative; overflow: hidden; }
+        .slider-wrapper { display: flex; transition: transform 0.3s ease-in-out; }
+        .slider-item { min-width: 100%; }
 
-        .logo {
-            font-size: 3.5rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            font-weight: 300;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #d4af37; /* Gold accent line */
-            display: inline-block;
-            padding-bottom: 10px;
-        }
-
-        .sub-text {
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            color: #666;
-            margin-top: 20px;
-        }
-
-        .launch-date {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #d4af37; /* Gold color */
-            margin-top: 10px;
-        }
-
-        .footer {
-            position: absolute;
-            bottom: 30px;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            color: #999;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Mobile adjustments */
-        @media (max-width: 600px) {
-            .logo { font-size: 2rem; }
-            .sub-text { font-size: 1rem; }
-        }
+        /* FIXED: Larger Address Box & Blue Font for inputs as requested */
+        #cust-address { height: 120px; color: #1e40af; font-weight: 600; }
+        #cust-name, #cust-phone { color: #1e40af; font-weight: 600; }
     </style>
 </head>
-<body>
+<body class="bg-gray-50 flex flex-col min-h-screen" id="top">
 
-    <div class="container">
-        <h1 class="logo">Siya Collection</h1>
-        <p class="sub-text">A NEW ERA OF FASHION IS LAUNCHING SOON</p>
-        <p class="launch-date"><br>www.siyacollection2026.in
-        </p>
+<header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-2 flex flex-col items-center">
+        <div class="brand-name text-lg md:text-2xl font-bold text-pink-500 uppercase whitespace-nowrap px-2">
+            Siya Collection
+        </div>
+        <div class="w-full flex items-center justify-between border-t border-gray-50 pt-2">
+            <button onclick="toggleMenu(true)" class="flex items-center gap-1 px-3 py-1 hover:bg-pink-50 rounded-lg transition border border-pink-100 group">
+                <span class="text-[10px] font-bold text-gray-700 group-hover:text-pink-600 uppercase tracking-tighter">Menu</span>
+                <i class="fa-solid fa-chevron-down text-[8px] text-pink-500"></i>
+            </button>
+             <div class="flex items-center gap-5">
+                <div class="relative cursor-pointer" onclick="navigateTo('wishlist')">
+                    <i class="fa-regular fa-heart text-xl text-gray-700"></i>
+                    <span id="wishlist-count" class="absolute -top-2 -right-1 bg-pink-400 text-white text-[9px] font-bold px-1.5 rounded-full hidden">0</span>
+                </div>
+                <div class="relative cursor-pointer" onclick="navigateTo('payment')">
+                    <i class="fa-solid fa-bag-shopping text-xl text-gray-700"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-1 bg-pink-500 text-white text-[9px] font-bold px-1.5 rounded-full">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Sidebar & Overlays -->
+<div id="menuOverlay" class="fixed inset-0 bg-black/50 z-[60] hidden opacity-0 transition-opacity duration-300" onclick="toggleMenu(false)"></div>
+<div id="sidebar" class="fixed top-0 left-0 h-full w-72 bg-white z-[70] shadow-2xl transform -translate-x-full sidebar">
+    <div class="p-6 border-b flex justify-between items-center">
+        <span class="font-bold text-lg">Menu Options</span>
+        <button onclick="toggleMenu(false)"><i class="fa-solid fa-xmark text-xl text-pink-500"></i></button>
+    </div>
+    <nav class="p-4 flex flex-col gap-2">
+        <button onclick="navigateTo('home')" class="flex items-center gap-4 p-4 hover:bg-pink-50 hover:text-pink-600 rounded-xl transition text-left">
+            <i class="fa-solid fa-house w-6"></i> Home Page
+        </button>
+        <button onclick="navigateTo('catalog')" class="flex items-center gap-4 p-4 hover:bg-pink-50 hover:text-pink-600 rounded-xl transition text-left">
+            <i class="fa-solid fa-shirt w-6"></i> Clothing Catalog
+        </button>
+        <button onclick="navigateTo('payment')" class="flex items-center gap-4 p-4 hover:bg-pink-50 hover:text-pink-600 rounded-xl transition text-left">
+            <i class="fa-solid fa-cart-shopping w-6"></i> Cart & Payment
+        </button>
+        <button onclick="navigateTo('about')" class="flex items-center gap-4 p-4 hover:bg-pink-50 hover:text-pink-600 rounded-xl transition text-left">
+            <i class="fa-solid fa-circle-info w-6"></i> About Us
+        </button>
+    </nav>
+</div>
+
+<main id="mainContent" class="max-w-7xl mx-auto p-4 md:p-8">
+    <!-- Home Page -->
+    <div id="page-home" class="page-transition">
+        <section class="mb-6">
+            <div class="bg-white rounded-2xl p-3 shadow-sm border border-pink-100 flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="bg-pink-500 text-white p-2 rounded-lg"><i class="fa-solid fa-tag text-xs"></i></div>
+                    <div>
+                        <h2 class="text-xs font-bold text-gray-800">Flat ₹100 Off</h2>
+                        <p class="text-[10px] text-gray-500">On orders above ₹1000</p>
+                    </div>
+                </div>
+                <button onclick="copyPromoCode('SIYANEW100', this)" class="bg-pink-50 border border-dashed border-pink-300 px-3 py-1.5 rounded-xl transition-all hover:bg-pink-100 cursor-pointer group relative">
+                    <p id="promoText" class="text-[10px] font-bold text-pink-600 tracking-tight">SIYANEW100</p>
+                    <span id="copyTooltip" class="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[8px] px-2 py-1 rounded opacity-0 transition-opacity">Copied!</span>
+                </button>
+            </div>
+        </section>        
+        <section class="mb-8"> 
+            <h2 class="text-xl font-bold mb-6 border-l-4 border-pink-500 pl-3">
+                <span class="text-blue-800 uppercase text-sm tracking-widest block mb-1">Latest Branded Collection</span>
+                <span class="text-blue-500 text-sm font-semibold">Contact: +91 9834524074</span>
+            </h2>    
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="max-w-[280px] mx-auto w-full aspect-[3/4] overflow-hidden rounded-2xl shadow-sm border border-gray-100"><img src="https://i.ibb.co/MyJ1bpCr/Dress-4.jpg" class="w-full h-full object-cover"></div>
+                <div class="max-w-[280px] mx-auto w-full aspect-[3/4] overflow-hidden rounded-2xl shadow-sm border border-gray-100"><img src="https://i.ibb.co/23KhVnbh/Dress-7.jpg" class="w-full h-full object-cover"></div>
+                <div class="max-w-[280px] mx-auto w-full aspect-[3/4] overflow-hidden rounded-2xl shadow-sm border border-gray-100"><img src="https://i.ibb.co/CD5j50b/Dress-5.jpg" class="w-full h-full object-cover"></div>
+            </div>
+        </section>
     </div>
 
-    <div class="footer">
-        © 2026 SIYA COLLECTION | PUNE, INDIA
+    <!-- Catalog Page -->
+    <div id="page-catalog" class="page-transition hidden">
+        <h2 class="text-2xl font-bold mb-4 text-center text-gray-700 uppercase tracking-widest">Our Catalog</h2>
+        <div class="max-w-md mx-auto mb-8 px-4">
+            <div class="relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <input type="text" id="catalogSearch" onkeyup="filterCatalog()" placeholder="Search by name or description..." class="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-200 text-sm">
+            </div>
+        </div>
+        <div id="catalog-container" class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto mb-8"></div>
     </div>
 
+    <!-- Payment/Cart Page -->
+    <div id="page-payment" class="page-transition hidden">
+        <div class="max-w-2xl mx-auto bg-white p-6 rounded-3xl shadow-lg border">
+            <div class="mb-8 bg-pink-50 p-4 rounded-2xl border border-pink-100">
+                <h3 class="text-center text-[12px] font-bold text-pink-500 uppercase tracking-widest mb-4">5 Easy Steps to Shop</h3>
+                <div class="grid grid-cols-5 gap-1 text-[7px] md:text-[9px] text-center font-bold uppercase">
+                    <div class="flex flex-col items-center gap-1 text-pink-600"><span class="w-5 h-5 rounded-full bg-pink-500 text-white flex items-center justify-center">1</span>Cart</div>
+                    <div class="flex flex-col items-center gap-1 text-pink-600"><span class="w-5 h-5 rounded-full bg-pink-500 text-white flex items-center justify-center">2</span>Address</div>
+                    <div class="flex flex-col items-center gap-1 text-pink-600"><span class="w-5 h-5 rounded-full bg-pink-500 text-white flex items-center justify-center">3</span>Discount</div>
+                    <div class="flex flex-col items-center gap-1 text-pink-600"><span class="w-5 h-5 rounded-full bg-pink-500 text-white flex items-center justify-center">4</span>Pay</div>
+                    <div class="flex flex-col items-center gap-1 text-pink-600"><span class="w-5 h-5 rounded-full bg-pink-500 text-white flex items-center justify-center">5</span>Confirm</div>
+                </div>
+            </div>
+            <h2 class="text-md font-bold mb-3 text-gray-800 flex items-center gap-2"><i class="fa-solid fa-basket-shopping text-pink-500"></i> 1. Check your cart</h2>
+            <div id="cart-items" class="space-y-3 mb-6"></div>
+            
+            <h2 class="text-md font-bold mb-3 text-gray-800 flex items-center gap-2"><i class="fa-solid fa-map-location-dot text-pink-500"></i> 2. Name and Address</h2>
+            <div class="grid grid-cols-1 gap-2 mb-6">
+                <input type="text" id="cust-name" placeholder="Full Name" class="w-full p-2 rounded-lg border border-gray-200 text-xs"> 
+                <input type="tel" id="cust-phone" maxlength="10" placeholder="10-Digit Mobile Number" class="w-full p-2 rounded-lg border border-gray-200 text-xs">
+                <textarea id="cust-address" placeholder="Full Address with Landmark." class="w-full p-2 rounded-lg border border-gray-200 text-xs"></textarea>
+            </div>
+
+            <h2 class="text-md font-bold mb-3 text-gray-800 flex items-center gap-2"><i class="fa-solid fa-ticket text-pink-500"></i> 3. Add Promo Code</h2>
+            <div class="flex gap-2 mb-6">
+                <input type="text" id="promo-input" placeholder="SIYAXXXXXX" class="flex-1 p-2 rounded-lg border border-gray-200 text-xs uppercase">
+                <button onclick="applyPromo()" class="bg-gray-800 text-white px-4 rounded-lg font-bold text-[10px]">Apply</button>
+            </div>
+
+            <div class="bg-gray-50 p-3 rounded-2xl mb-6 space-y-1 border border-dashed border-gray-200">
+                <div class="flex justify-between text-xs"><span class="text-gray-500">Subtotal:</span><span id="subtotal-val">Rs. 0</span></div>
+                <div id="promo-row" class="flex justify-between text-xs text-green-600 hidden font-bold"><span>Discount:</span><span id="discount-val">- Rs. 0</span></div>
+                <div class="flex justify-between text-lg font-bold border-t pt-2 mt-2"><span>Total Payable:</span><span class="text-pink-600" id="cart-total">Rs. 0</span></div>
+            </div>
+
+<h2 class="text-md font-bold mb-3 text-gray-800 flex items-center gap-2">
+    <i class="fa-solid fa-qrcode text-pink-500"></i> 4. Pay via UPI Scanner
+</h2>
+
+<div class="bg-pink-50 p-6 rounded-3xl text-center mb-6 border border-pink-100 shadow-sm">
+    <!-- QR Code Container with white border glow -->
+    <div class="relative inline-block p-4 bg-white rounded-2xl shadow-md mb-4">
+        <img src="https://i.ibb.co/VWh3PbD7/Gpay-Siya-Collection.jpg" 
+             class="w-32 h-32 mx-auto rounded-lg">
+    </div>
+    
+    <p class="text-[10px] font-bold text-blue-900 uppercase tracking-tight">Scan to pay via any UPI App</p>
+    <div class="flex justify-center gap-4 mt-2 opacity-60">
+        <i class="fa-brands fa-google-pay text-lg"></i>
+        <i class="fa-solid fa-building-columns text-sm"></i>
+        <i class="fa-solid fa-mobile-screen-button text-sm"></i>
+    </div>
+</div>
+            <h2 class="text-md font-bold mb-3 text-gray-800 flex items-center gap-2"><i class="fa-brands fa-whatsapp text-green-500"></i> 5. Confirm Order</h2>
+            <button onclick="sendWhatsAppOrder()" class="w-full bg-green-500 text-white py-3 rounded-xl font-bold shadow-lg flex items-center justify-center gap-3 text-sm">
+                Click to Send Order & <br> Payment Proof
+            </button>
+        </div>
+    </div>
+
+    <!-- About Page -->
+    <div id="page-about" class="page-transition hidden">
+        <div class="max-w-6xl mx-auto py-12 bg-white rounded-3xl shadow-sm px-6">
+            <h3 class="text-center text-xs uppercase text-gray-400 font-bold tracking-widest mb-10">Our Leadership Team</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center mb-12">
+                <div>
+                    <img src="https://i.ibb.co/Fb7R3hc8/Pallavi-Pic.png" class="w-24 h-32 mx-auto object-cover rounded-xl border border-pink-100 mb-2">
+                    <p class="font-bold text-xs">Pallavi Pradhan</p>
+                    <p class="text-pink-500 text-[10px]">Co-Founder</p>
+                </div>
+                <div>
+                    <img src="https://i.ibb.co/Zkw8f9X/Ruplekha-pic.jpg" class="w-24 h-32 mx-auto object-cover rounded-xl border border-pink-100 mb-2">
+                    <p class="font-bold text-xs">Ruplekha Gaikwad</p>
+                    <p class="text-pink-500 text-[10px]">Co-Founder</p>
+                </div>
+                <div>
+                    <img src="https://i.ibb.co/6RVH5gvP/Neha-Pic.jpg" class="w-24 h-32 mx-auto object-cover rounded-xl border border-pink-100 mb-2">
+                    <p class="font-bold text-xs">Neha Pradhan</p>
+                    <p class="text-pink-500 text-[10px]">Co-Founder</p>
+                </div>
+                <div>
+                    <img src="https://i.ibb.co/XxVbXpLF/Nitesh-Pic.jpg" class="w-24 h-32 mx-auto object-cover rounded-xl border border-pink-100 mb-2">
+                    <p class="font-bold text-xs">Nitesh Gaikwad</p>
+                    <p class="text-pink-500 text-[10px]">Technical Head</p>
+                </div>
+            </div>
+
+<section class="grid grid-cols-2 gap-2 my-4">
+    <!-- Weekend Home Delivery -->
+    <div class="bg-pink-50/50 p-3 rounded-2xl border border-pink-100 flex flex-col items-center text-center">
+        <div class="w-8 h-8 bg-white rounded-xl shadow-sm flex items-center justify-center mb-2 text-pink-500">
+            <i class="fa-solid fa-truck-fast text-sm"></i>
+        </div>
+        <p class="text-[9px] font-bold text-blue-900 leading-tight">Weekend Home Delivery</p>
+    </div>
+
+    <!-- Free Delivery -->
+    <div class="bg-pink-50/50 p-3 rounded-2xl border border-pink-100 flex flex-col items-center text-center">
+        <div class="w-8 h-8 bg-white rounded-xl shadow-sm flex items-center justify-center mb-2 text-pink-500">
+            <i class="fa-solid fa-boxes-packing text-sm"></i>
+        </div>
+        <p class="text-[9px] font-bold text-blue-900 leading-tight">Free Delivery > 1000 Rs.</p>
+    </div>
+
+    <!-- 7 Days Return -->
+    <div class="bg-pink-50/50 p-3 rounded-2xl border border-pink-100 flex flex-col items-center text-center">
+        <div class="w-8 h-8 bg-white rounded-xl shadow-sm flex items-center justify-center mb-2 text-pink-500">
+            <i class="fa-solid fa-arrow-rotate-left text-sm"></i>
+        </div>
+        <p class="text-[9px] font-bold text-blue-900 leading-tight">7 Days Return Option</p>
+    </div>
+
+    <!-- Easy Refund -->
+    <div class="bg-pink-50/50 p-3 rounded-2xl border border-pink-100 flex flex-col items-center text-center">
+        <div class="w-8 h-8 bg-white rounded-xl shadow-sm flex items-center justify-center mb-2 text-pink-500">
+            <i class="fa-solid fa-hand-holding-dollar text-sm"></i>
+        </div>
+        <p class="text-[9px] font-bold text-blue-900 leading-tight">Easy Refund in 2 days</p>
+    </div>
+</section>
+           <div class="h-px w-full bg-gray-100 my-8"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h4 class="font-bold text-gray-800 uppercase text-[11px] mb-2 ml-1">Contact Details</h4>
+                    <div class="space-y-1.5">
+                        <div class="flex items-center py-1 px-2.5 bg-gray-50 rounded-lg">
+                            <div class="flex gap-2 mr-3 text-sm">
+                                <a href="tel:9834524074" class="text-blue-500"><i class="fa-solid fa-phone"></i></a>
+                                <a href="https://wa.me/919834524074" class="text-green-500"><i class="fa-brands fa-whatsapp"></i></a>
+                            </div>
+                            <div>
+                                <p class="text-[8px] uppercase font-bold text-gray-400 leading-none">Call / WhatsApp</p>
+                                <p class="text-sm font-bold text-gray-800">9834524074</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center py-1 px-2.5 bg-gray-50 rounded-lg">
+                            <i class="fa-brands fa-instagram text-pink-500 text-sm mr-3"></i>
+                            <div>
+                                <p class="text-[8px] uppercase font-bold text-gray-400 leading-none">Follow Us</p>
+                                <a href="https://instagram.com/Siya.collection2026" target="_blank" class="text-[11px] font-bold text-gray-800">@Siya.collection2026</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center py-1 px-2.5 bg-gray-50 rounded-lg overflow-hidden">
+                            <i class="fa-solid fa-envelope text-red-400 text-sm mr-3"></i>
+                            <div>
+                                <p class="text-[8px] uppercase font-bold text-gray-400 leading-none">Customer Care</p>
+                                <a href="mailto:siya.collection2026@gmail.com" class="text-[11px] font-bold text-gray-800 truncate block">siya.collection2026@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-800 uppercase text-xs mb-4">Store Location</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        <span class="font-bold text-pink-600 uppercase">Siya Collection</span><br>
+                        K.K. Kudale Complex, <br>Tapovan Mandir road,<br> Opp. Vaibhav Nagar, <br>Pimpri, 411017
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Wishlist Page -->
+    <div id="page-wishlist" class="page-transition hidden">
+        <h2 class="text-2xl font-bold mb-8 text-center text-gray-700 uppercase tracking-widest">My Wishlist</h2>
+        <div id="wishlist-container" class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto mb-8"></div>
+        <div id="wishlist-empty" class="hidden text-center py-20"><p class="text-gray-500">Your wishlist is empty.</p></div>
+    </div>
+
+    <!-- Success Screen -->
+    <div id="thank-you-screen" class="fixed inset-0 z-[200] hidden bg-white flex items-center justify-center p-6 text-center">
+        <div class="animate-bounce-in max-w-sm">
+            <div class="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6"><i class="fa-solid fa-check text-4xl"></i></div>
+            <h2 class="brand-name text-2xl font-bold text-gray-800 mb-2 uppercase">Order Ready!</h2>
+            <p class="text-gray-500 text-sm mb-8">Click the button below to send details to WhatsApp.</p>
+            <button id="final-whatsapp-btn" class="w-full bg-green-500 text-white py-4 rounded-xl font-bold shadow-lg flex items-center justify-center gap-2">
+                <i class="fa-brands fa-whatsapp text-xl"></i> Go to WhatsApp to send order
+            </button>
+            <button onclick="location.reload()" class="mt-4 text-gray-400 text-xs">Cancel & Back to Home</button>
+        </div>
+    </div>
+</main>
+
+<!-- FOOTER -->
+
+    <footer class="bg-white border-t border-gray-100 mt-12">
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-center md:text-left">
+                    <p class="brand-name text-pink-500 font-bold text-lg">SIYA COLLECTION</p>
+                    <p class="text-xs text-gray-400 mt-1">© 2026 All Rights Reserved.</p>
+                </div>
+                <div class="text-center bg-gray-50 px-6 py-3 rounded-2xl border border-gray-100">
+                    <p class="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-1">Technical Credits</p>
+                    <p class="text-xs font-semibold text-gray-600">Website developed by <span class="text-pink-600">Nitesh Gaikwad</span></p>
+                </div>
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-gray-400 hover:text-pink-500 transition text-sm flex items-center gap-2">
+                    Back to Top <i class="fa-solid fa-arrow-up"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+<!-- PRODUCT MODAL (WITH SHARE BUTTON & EXTRA IMAGES SLIDER) -->
+<div id="product-modal" class="fixed inset-0 z-[100] hidden bg-black/90 overflow-y-auto">
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-4xl rounded-3xl overflow-hidden relative flex flex-col md:flex-row animate-bounce-in">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 z-[110] bg-white/80 p-2 rounded-full"><i class="fa-solid fa-xmark text-xl text-pink-500"></i></button>
+            <div class="md:w-1/2 bg-gray-100 p-4 relative">
+                <div class="slider-container rounded-xl overflow-hidden relative">
+                    <div id="modal-slider-wrapper" class="slider-wrapper"></div>
+                    <!-- Slider Arrows -->
+                    <button onclick="moveSlider(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/50 p-2 rounded-full text-pink-500"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button onclick="moveSlider(1)" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/50 p-2 rounded-full text-pink-500"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <div id="modal-thumbnails" class="flex gap-2 mt-4 justify-center overflow-x-auto pb-2"></div>
+            </div>
+            <div class="md:w-1/2 p-6 md:p-10">
+                <h1 id="modal-title" class="text-2xl font-bold text-gray-800 uppercase"></h1>
+                <p id="modal-price" class="text-xl font-bold text-pink-600 mt-2"></p>
+                <div id="modal-desc" class="text-gray-600 text-sm mt-4 leading-relaxed"></div>
+                
+                <div class="flex gap-2 mt-8">
+                    <button id="modal-add-btn-final" class="flex-[2] bg-pink-500 text-white py-4 rounded-2xl font-bold shadow-lg">Add to Bag</button>
+                    <!-- WhatsApp Share Button -->
+                    <button id="modal-share-btn" class="flex-1 bg-green-50 text-green-600 py-4 rounded-2xl font-bold border border-green-200 flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Share
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FIXED CUSTOM POPUP -->
+<div id="custom-popup" class="fixed inset-0 items-center justify-center z-[250] hidden bg-black/40 px-4">
+    <div class="bg-white rounded-3xl p-6 max-w-sm w-full text-center shadow-2xl">
+        <h3 class="text-lg font-bold">Item Added!</h3>
+        <p id="popup-message" class="text-gray-600 text-sm mb-6"></p>
+        <button onclick="navigateTo('payment'); closePopup();" class="w-full bg-pink-500 text-white py-3 rounded-xl font-bold">Go to Cart</button>
+        <button onclick="closePopup()" class="mt-2 text-gray-400 text-xs py-2 block w-full text-center">Continue Shopping</button>
+    </div>
+</div>
+
+<script>
+    let cart = [];
+    let appliedDiscount = 0;
+    const products = [
+        { id: 1, name: "Design #001", price: 750, img: "https://i.ibb.co/60jP12bF/Dress-1.jpg", desc: "Western Long Maxi - White color", fullDesc: "Premium quality Western Long Maxi in white. Perfect for parties and summer outings.", extraImages: ["https://i.ibb.co/60jP12bF/Dress-1.jpg"], sizes: ["L", "XL", "XXL"] },
+        { id: 2, name: "Design #002", price: 599, img: "https://i.ibb.co/0pK39KcD/Dress-2.jpg", desc: "Western Long Maxi - pink color", fullDesc: "Western Long Maxi - White color", fullDesc: "Premium quality Western Long Maxi in Pink.", extraImages: ["https://i.ibb.co/0pK39KcD/Dress-2.jpg"], sizes: ["M", "L", "XL", "XXL"] },
+        { id: 3, name: "Design #003", price: 399, img: "https://i.ibb.co/ksY91SWF/Dress-3.jpg", desc: "India Long Kurti", fullDesc: "Golden print long Indian kurti", extraImages: ["https://i.ibb.co/ksY91SWF/Dress-3.jpg"], sizes: ["L", "XL"] },
+        { id: 4, name: "Design #004", price: 999, img: "https://i.ibb.co/MyJ1bpCr/Dress-4.jpg", desc: "Indian 3 piece dress - Blue color", fullDesc: "Stylish Blue dress with modern design cuts.", extraImages: ["https://i.ibb.co/6krxH42/Dress-4-A.jpg"], sizes: ["M", "L"] },
+        { id: 5, name: "Design #005", price: 699, img: "https://i.ibb.co/CD5j50b/Dress-5.jpg", desc: "Western Long Maxi - Cream & pink color", fullDesc: "Vibrant pink designer outfit. Soft on skin and premium fabric.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
+        { id: 6, name: "Design #006", price: 799, img: "https://i.ibb.co/JRwXkvVG/Dress-6.jpg", desc: "Cord set - light gray", fullDesc: "tranding office wear dress & stylish.", extraImages: [], sizes: ["M", "XL", "XXL"] },
+        { id: 7, name: "Design #007", price: 799, img: "https://i.ibb.co/23KhVnbh/Dress-7.jpg", desc: "Cord set - multicolour", fullDesc: "tranding mirrored dress & stylish look.", extraImages: [], sizes: ["M", "L", "XXL"] },
+        { id: 8, name: "Design #008", price: 499, img: "https://i.ibb.co/cXs6wJZh/Dress-8.jpg", desc: "Kurta dress Suit - Orange & white", fullDesc: "Dailywear kurta plazo set with affrortable rates.", extraImages: ["https://i.ibb.co/Fbwf5GDr/Dress-8-A.jpg"], sizes: ["M", "L", "XL", "XXL"] },
+        { id: 9, name: "Design #009", price: 499, img: "https://i.ibb.co/h1Lg1Yhk/Dress-9.jpg", desc: "Kurta dress Suit - Black", fullDesc: "Dailywear kurta plazo set with affrortable rates.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
+        { id: 10, name: "Design #010", price: 499, img: "https://i.ibb.co/DfsyJk1v/Dress-10.jpg", desc: "Cord set - Red/Green", fullDesc: "tranding office wear dress & stylish.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
+        { id: 11, name: "Design #011", price: 499, img: "https://i.ibb.co/bgkMBp6t/Dress-11.jpg", desc: "Cord set - Black", fullDesc: "tranding office wear dress & stylish.", extraImages: ["https://i.ibb.co/Y4yb8pKf/Dress-11-A.jpg"], sizes: ["M", "L", "XL", "XXL"] },
+        { id: 12, name: "Design #012", price: 499, img: "https://i.ibb.co/Bb1CRft/Dress-12.jpg", desc: "Cord set - Peacock Green", fullDesc: "tranding office wear dress & stylish.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
+        { id: 13, name: "Design #013", price: 499, img: "https://i.ibb.co/27L7b9LF/Dress-13.jpg", desc: "Indian 3 piece dress - Light brown color", fullDesc: "Stylish dress with comfort.", extraImages: ["https://i.ibb.co/xqG9N8V7/Dress-13-A.jpg"], sizes: ["M", "L", "XL", "XXL"] },
+        { id: 14, name: "Design #014", price: 499, img: "https://i.ibb.co/jtcwV6Y/Dress-14.jpg", desc: "Indian 3 piece dress - Green color", fullDesc: "Stylish Green dress with modern design cuts.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] }
+    ];
+
+    function renderCatalog(filtered = products) {
+        const container = document.getElementById('catalog-container');
+        const wishlist = JSON.parse(localStorage.getItem('siya_wishlist') || '[]');
+        container.innerHTML = filtered.map(p => {
+            const isLiked = wishlist.includes(p.id);
+            return `
+                <div class="bg-white rounded-xl border border-gray-100 p-2 relative shadow-sm">
+                    <button onclick="toggleWishlist(${p.id}, event)" class="absolute top-2 right-2 z-10 w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center">
+                        <i class="${isLiked ? 'fa-solid text-red-500' : 'fa-regular text-gray-400'} fa-heart"></i>
+                    </button>
+                    <div onclick="openProductModal(${p.id})" class="cursor-pointer">
+                        <img src="${p.img}" class="aspect-[3/4] object-cover rounded-lg w-full">
+                        <div class="mt-2">
+                            <h3 class="text-[10px] font-bold text-pink-500 uppercase">${p.name}</h3>
+                            <p class="text-[9px] text-gray-500 truncate">${p.desc}</p>
+                            <p class="text-xs font-bold mt-1">Rs. ${p.price}</p>
+                        </div>
+                    </div>
+            <label class="block text-[8px] font-bold mt-4 uppercase text-gray-400">Select Size:</label>
+                    <select id="size-${p.id}" class="w-full mt-2 text-[10px] p-1 border rounded bg-gray-50 font-bold">
+                        ${p.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
+                    </select>
+                    <button onclick="addToCartWithSize('${p.name}', ${p.price}, '${p.img}', 'size-${p.id}')" class="w-full mt-2 bg-pink-500 text-white py-2 rounded-lg text-[10px] font-bold">Add to Bag</button>
+                </div>`;
+        }).join('');
+    }
+
+    function openProductModal(productId) {
+        const product = products.find(p => p.id === productId);
+        currentSlideIndex = 0;
+        document.getElementById('modal-title').innerText = product.name;
+        document.getElementById('modal-price').innerText = "Rs. " + product.price;
+        document.getElementById('modal-desc').innerHTML = `
+            <p class="text-pink-500 font-bold mb-1 uppercase text-[11px] tracking-widest">${product.desc}</p>
+
+
+            <p class="text-xs">${product.fullDesc}</p>
+            <label class="block text-[10px] font-bold mt-4 uppercase text-gray-400">Select Size:</label>
+            <select id="modal-size-select" class="w-full mt-4 p-2 border rounded-xl bg-gray-50 text-sm font-bold">
+                ${product.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
+            </select>`;
+        
+        // Handle Extra Images Slider
+        const images = [product.img, ...(product.extraImages || [])];
+        totalSlides = images.length;
+        document.getElementById('modal-slider-wrapper').innerHTML = images.map(img => `<div class="slider-item"><img src="${img}" class="w-full aspect-[3/4] object-cover"></div>`).join('');
+        document.getElementById('modal-thumbnails').innerHTML = images.map((img, i) => `<img src="${img}" onclick="goToSlide(${i})" class="w-14 h-18 object-cover rounded-lg cursor-pointer border-2 border-transparent">`).join('');
+        updateSliderPosition();
+
+        // Add Button Logic
+        document.getElementById('modal-add-btn-final').onclick = () => {
+            const sz = document.getElementById('modal-size-select').value;
+            addToCartWithSize(product.name, product.price, product.img, 'modal-size-select', true);
+            closeProductModal();
+        };
+
+        // WhatsApp Share Logic
+        document.getElementById('modal-share-btn').onclick = () => {
+            const msg = `Check out this beautiful design from \n *Siya Collection* -\n*${product.name}*\n${product.desc}\nPrice: Rs. ${product.price}\n\n📸 Product Image: ${product.img}\n\n✨ See more designs here: https://siya-collection.github.io`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+        };
+
+        document.getElementById('product-modal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function updateSliderPosition() {
+        document.getElementById('modal-slider-wrapper').style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+    }
+
+    function moveSlider(dir) { currentSlideIndex = (currentSlideIndex + dir + totalSlides) % totalSlides; updateSliderPosition(); }
+    function goToSlide(idx) { currentSlideIndex = idx; updateSliderPosition(); }
+
+    function addToCartWithSize(name, price, img, selectId, isModal = false) {
+        const sz = document.getElementById(selectId).value;
+        cart.push({ id: Date.now(), name, price, img, size: sz });
+        document.getElementById('cart-count').innerText = cart.length;
+        const popup = document.getElementById('custom-popup');
+        document.getElementById('popup-message').innerText = `${name} (${sz}) added!`;
+        popup.classList.remove('hidden');
+        popup.classList.add('flex');
+    }
+    function updateCartCount() { document.getElementById('cart-count').innerText = cart.length; }
+
+    function showPopup(msg) {
+        const popup = document.getElementById('custom-popup');
+        document.getElementById('popup-message').innerText = msg;
+        popup.classList.remove('hidden');
+        popup.classList.add('flex');
+    }
+
+    function closePopup() {
+        const popup = document.getElementById('custom-popup');
+        popup.classList.add('hidden');
+        popup.classList.remove('flex');
+    }
+
+    function closeProductModal() { document.getElementById('product-modal').classList.add('hidden'); document.body.style.overflow = 'auto'; }
+
+    function navigateTo(pageId) {
+        toggleMenu(false);
+        ['home', 'catalog', 'payment', 'about', 'wishlist'].forEach(p => document.getElementById(`page-${p}`)?.classList.add('hidden'));
+        document.getElementById(`page-${pageId}`)?.classList.remove('hidden');
+        if(pageId === 'catalog') renderCatalog();
+        if(pageId === 'payment') renderCart();
+        if(pageId === 'wishlist') renderWishlist();
+        window.scrollTo(0,0);
+    }
+
+    function renderCart() {
+        const container = document.getElementById('cart-items');
+        if (cart.length === 0) {
+            container.innerHTML = '<p class="text-center py-10 text-gray-400 text-xs">Your bag is empty.</p>';
+            document.getElementById('subtotal-val').innerText = "Rs. 0";
+            document.getElementById('cart-total').innerText = "Rs. 0";
+            return;
+        }
+        let sub = 0;
+        container.innerHTML = cart.map(item => {
+            sub += item.price;
+            return `<div class="flex items-center gap-4 bg-gray-50 p-3 rounded-xl border border-gray-100">
+                <img src="${item.img}" class="w-10 h-14 object-cover rounded-lg">
+                <div class="flex-1 text-[11px] font-bold">${item.name} (Size: ${item.size}) <div class="text-pink-600">Rs. ${item.price}</div></div>
+                <button onclick="removeFromCart(${item.id})" class="text-red-400 p-2"><i class="fa-solid fa-trash-can"></i></button>
+            </div>`;
+        }).join('');
+        document.getElementById('subtotal-val').innerText = "Rs. " + sub;
+        document.getElementById('cart-total').innerText = "Rs. " + (sub - appliedDiscount);
+    }
+
+    function removeFromCart(id) { cart = cart.filter(i => i.id !== id); updateCartCount(); renderCart(); }
+
+    function applyPromo() {
+        const input = document.getElementById('promo-input').value.toUpperCase();
+        let sub = cart.reduce((s, i) => s + i.price, 0);
+        if(input === "SIYANEW100" && sub >= 1000) {
+            appliedDiscount = 100;
+            document.getElementById('promo-row').classList.remove('hidden');
+            document.getElementById('discount-val').innerText = "- Rs. 100";
+            renderCart();
+        } else { alert("Code invalid or min. order ₹1000 not met"); }
+    }
+
+
+function sendWhatsAppOrder() {
+    const n = document.getElementById('cust-name').value;
+    const p = document.getElementById('cust-phone').value;
+    const a = document.getElementById('cust-address').value;
+    
+    // 1. Validation
+    if (!n || !p || !a || cart.length === 0) { 
+        alert("Please complete Steps 1, 2 & 4 (Payment, Address and Cart)"); 
+        return; 
+    }
+// Validation for empty fields and exact 10-digit phone number
+    if (!n || !a || cart.length === 0) { 
+        alert("Please fill in your name and address."); 
+        return; 
+    }
+    // Check if phone number is exactly 10 digits
+    if (p.length !== 10 || isNaN(p)) {
+        alert("Please enter a valid 10-digit mobile number.");
+        return;
+    }
+    // 2. Build the Message
+    let sub = cart.reduce((s, i) => s + i.price, 0);
+    let fin = sub - (typeof appliedDiscount !== 'undefined' ? appliedDiscount : 0);
+    let txt = `*NEW ORDER - SIYA COLLECTION*\n\n*Customer:* ${n}\n*Phone:* ${p}\n*Address:* ${a}\n\n*Items:*`;
+    // Updated loop to include the item image link
+    cart.forEach((i, idx) => {
+        txt += `\n${idx+1}. ${i.name} (${i.size}) - Rs.${i.price}`;
+        if (i.img) {
+            txt += `\n   View Item: ${i.img}`; // This adds the link right under the item name
+        }
+    });
+
+    if(appliedDiscount > 0) txt += `\n\n*Promo Applied:* -Rs.100`;
+    
+    txt += `\n*TOTAL PAID:* Rs.${fin}\n\nSending payment proof now.`;
+
+// 2. Identify the "Go to WhatsApp" button on the Thank You screen
+    const finalBtn = document.getElementById('final-whatsapp-btn');
+    
+    // 3. Attach the WhatsApp link to that specific button
+    finalBtn.onclick = function() {
+    window.open(`https://wa.me/919834524074?text=${encodeURIComponent(txt)}`, '_blank');
+        // Clear cart after they actually click to go to WhatsApp
+        cart = [];
+        document.getElementById('cart-count').innerText = "0";
+        location.reload(); // Optional: Refresh to home after they leave
+    };
+
+    // 4. Show the screen (It will stay here until they click the button)
+    const thankYou = document.getElementById('thank-you-screen');
+    if (thankYou) {
+        thankYou.classList.remove('hidden');
+        thankYou.classList.add('flex');
+    }
+}
+
+    function toggleWishlist(id, e) {
+        if(e) e.stopPropagation();
+        let wishlist = JSON.parse(localStorage.getItem('siya_wishlist') || '[]');
+        if(wishlist.includes(id)) wishlist = wishlist.filter(x => x !== id);
+        else wishlist.push(id);
+        localStorage.setItem('siya_wishlist', JSON.stringify(wishlist));
+        updateWishlistCount();
+        renderCatalog();
+        renderWishlist();
+    }
+
+    function updateWishlistCount() {
+        const len = JSON.parse(localStorage.getItem('siya_wishlist') || '[]').length;
+        document.getElementById('wishlist-count').innerText = len;
+        document.getElementById('wishlist-count').classList.toggle('hidden', len === 0);
+    }
+
+function renderWishlist() {
+    const container = document.getElementById('wishlist-container');
+    const wishlistIds = JSON.parse(localStorage.getItem('siya_wishlist') || '[]');
+    const wishProducts = products.filter(p => wishlistIds.includes(p.id));
+    
+    // Toggle the empty state message
+    document.getElementById('wishlist-empty').classList.toggle('hidden', wishProducts.length > 0);
+    
+    container.innerHTML = wishProducts.map(p => `
+        <div class="bg-white rounded-xl border border-gray-100 p-2 relative shadow-sm">
+            <!-- Heart Button to Remove from Wishlist -->
+            <button onclick="toggleWishlist(${p.id}, event)" class="absolute top-2 right-2 z-10 w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center">
+                <i class="fa-solid text-red-500 fa-heart"></i>
+            </button>
+            
+            <!-- Click Image to Open Modal -->
+            <div onclick="openProductModal(${p.id})" class="cursor-pointer">
+                <img src="${p.img}" class="aspect-[3/4] object-cover rounded-lg w-full">
+                <div class="mt-2">
+                    <h3 class="text-[10px] font-bold text-pink-500 uppercase">${p.name}</h3>
+                    <p class="text-[9px] text-gray-500 truncate">${p.desc}</p>
+                    <p class="text-xs font-bold mt-1">Rs. ${p.price}</p>
+                </div>
+            </div>
+
+            <!-- Size Selection Dropdown -->
+            <select id="wish-size-${p.id}" class="w-full mt-2 text-[10px] p-1 border rounded bg-gray-50 font-bold">
+                ${p.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
+            </select>
+
+            <!-- Add to Bag Button -->
+            <button onclick="addToCartWithSize('${p.name}', ${p.price}, '${p.img}', 'wish-size-${p.id}')" 
+                    class="w-full mt-2 bg-pink-500 text-white py-2 rounded-lg text-[10px] font-bold">
+                Add to Bag
+            </button>
+        </div>`).join('');
+}
+
+    function toggleMenu(show) {
+        document.getElementById('sidebar').classList.toggle('-translate-x-full', !show);
+        document.getElementById('menuOverlay').classList.toggle('hidden', !show);
+    }
+
+    function copyPromoCode(code) {
+        navigator.clipboard.writeText(code);
+        document.getElementById('copyTooltip').classList.remove('opacity-0');
+        setTimeout(() => document.getElementById('copyTooltip').classList.add('opacity-0'), 2000);
+    }
+
+    function filterCatalog() {
+        const term = document.getElementById('catalogSearch').value.toLowerCase();
+        renderCatalog(products.filter(p => p.name.toLowerCase().includes(term) || p.desc.toLowerCase().includes(term)));
+    }
+
+    updateWishlistCount();
+    renderCatalog();
+</script>
 </body>
 </html>
