@@ -143,12 +143,12 @@
         
         <!-- PASTE THE FILTER AND SORT BAR HERE -->
 <!-- Optimized Filter and Sort Bar for Mobile -->
-<div class="grid grid-cols-3 gap-2 p-3 bg-white sticky top-0 z-20 border-b mb-4 max-w-6xl mx-auto rounded-xl shadow-sm">
+<div class="grid grid-cols-2 gap-2 p-3 bg-white sticky top-0 z-20 border-b mb-4 max-w-6xl mx-auto rounded-xl shadow-sm">
     
     <!-- Filter by Type -->
     <select id="filter-type" onchange="applyFilters()" 
         class="w-full bg-gray-50 p-2 border border-gray-200 rounded-lg text-[9px] font-bold uppercase text-gray-600 appearance-none focus:border-pink-300 outline-none">
-        <option value="all">Types</option>
+        <option value="all">Types-ALL</option>
         <option value="Saree">Saree</option>
         <option value="Western">Western</option>
         <option value="Indian">Indian</option>
@@ -157,20 +157,12 @@
     <!-- Filter by Price Range -->
     <select id="filter-price" onchange="applyFilters()" 
         class="w-full bg-gray-50 p-2 border border-gray-200 rounded-lg text-[9px] font-bold uppercase text-gray-600 appearance-none focus:border-pink-300 outline-none">
-        <option value="all">Prices</option>
+        <option value="all">Prices-ALL</option>
         <option value="0-500">Under 500</option>
         <option value="501-1000">501-1000</option>
         <option value="1001-9999">Over 1000</option>
     </select>
 
-    <!-- Sort Controls -->
-    <select id="sort-order" onchange="applyFilters()" 
-        class="w-full bg-gray-50 p-2 border border-pink-200 rounded-lg text-[9px] font-extrabold uppercase text-pink-600 appearance-none focus:border-pink-400 outline-none">
-        <option value="default">Sort</option>
-        <option value="price-low">Low-High</option>
-        <option value="price-high">High-Low</option>
-        <option value="name-az">A-Z</option>
-    </select>
 </div>
 
         <!-- Keep your existing search bar below it -->
@@ -535,7 +527,7 @@ document.getElementById('modal-slider-wrapper').innerHTML = images.map(img =>
 
         // WhatsApp Share Logic
         document.getElementById('modal-share-btn').onclick = () => {
-            const msg = `Check out this beautiful design from \n *Siya Collection* -\n*${product.name}*\n${product.desc}\nPrice: Rs. ${product.price}\n\n📸 Product Image: ${product.img}\n\n✨ See more designs here: https://siya-collection.github.io`;
+            const msg = `Check out this beautiful design from \n *Siya Collection* -\n*${product.name}*\n${product.desc}\nPrice: Rs. ${product.price}\n\n📸 Product Image: ${product.img}\n\n✨ See more designs here: https://www.siyacollection2026.in/`;
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
         };
 
