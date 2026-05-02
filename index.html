@@ -41,6 +41,17 @@
         /* FIXED: Larger Address Box & Blue Font for inputs as requested */
         #cust-address { height: 120px; color: #1e40af; font-weight: 600; }
         #cust-name, #cust-phone { color: #1e40af; font-weight: 600; }
+
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
     </style>
 </head>
 <body class="bg-gray-50 flex flex-col min-h-screen" id="top">
@@ -94,7 +105,7 @@
 
 <main id="mainContent" class="max-w-7xl mx-auto p-4 md:p-8">
     <!-- Home Page -->
-    <div id="page-home" class="page-transition">
+    <div id="page-home" class="page-transition hidden">
         <section class="mb-6">
             <div class="bg-white rounded-2xl p-3 shadow-sm border border-pink-100 flex items-center justify-between gap-4">
                 <div class="flex items-center gap-3">
@@ -123,17 +134,57 @@
         </section>
     </div>
 
-    <!-- Catalog Page -->
-    <div id="page-catalog" class="page-transition hidden">
+
+
+
+<!-- Catalog Page -->
+    <div id="page-catalog" class="page-transition"> <!-- Removed 'hidden' as per your previous request -->
         <h2 class="text-2xl font-bold mb-4 text-center text-gray-700 uppercase tracking-widest">Our Catalog</h2>
+        
+        <!-- PASTE THE FILTER AND SORT BAR HERE -->
+<!-- Optimized Filter and Sort Bar for Mobile -->
+<div class="grid grid-cols-3 gap-2 p-3 bg-white sticky top-0 z-20 border-b mb-4 max-w-6xl mx-auto rounded-xl shadow-sm">
+    
+    <!-- Filter by Type -->
+    <select id="filter-type" onchange="applyFilters()" 
+        class="w-full bg-gray-50 p-2 border border-gray-200 rounded-lg text-[9px] font-bold uppercase text-gray-600 appearance-none focus:border-pink-300 outline-none">
+        <option value="all">Types</option>
+        <option value="Saree">Saree</option>
+        <option value="Western">Western</option>
+        <option value="Indian">Indian</option>
+    </select>
+
+    <!-- Filter by Price Range -->
+    <select id="filter-price" onchange="applyFilters()" 
+        class="w-full bg-gray-50 p-2 border border-gray-200 rounded-lg text-[9px] font-bold uppercase text-gray-600 appearance-none focus:border-pink-300 outline-none">
+        <option value="all">Prices</option>
+        <option value="0-500">Under 500</option>
+        <option value="501-1000">501-1000</option>
+        <option value="1001-9999">Over 1000</option>
+    </select>
+
+    <!-- Sort Controls -->
+    <select id="sort-order" onchange="applyFilters()" 
+        class="w-full bg-gray-50 p-2 border border-pink-200 rounded-lg text-[9px] font-extrabold uppercase text-pink-600 appearance-none focus:border-pink-400 outline-none">
+        <option value="default">Sort</option>
+        <option value="price-low">Low-High</option>
+        <option value="price-high">High-Low</option>
+        <option value="name-az">A-Z</option>
+    </select>
+</div>
+
+        <!-- Keep your existing search bar below it -->
         <div class="max-w-md mx-auto mb-8 px-4">
             <div class="relative">
                 <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                <input type="text" id="catalogSearch" onkeyup="filterCatalog()" placeholder="Search by name or description..." class="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-200 text-sm">
+                <input type="text" id="catalogSearch" onkeyup="applyFilters()" placeholder="Search..." class="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-200 text-sm">
             </div>
         </div>
         <div id="catalog-container" class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto mb-8"></div>
-    </div>
+   
+</div>
+
+
 
     <!-- Payment/Cart Page -->
     <div id="page-payment" class="page-transition hidden">
@@ -195,66 +246,79 @@
         </div>
     </div>
 
+
     <!-- About Page -->
-    <div id="page-about" class="page-transition hidden">
-        <div class="max-w-6xl mx-auto py-12 bg-white rounded-3xl shadow-sm px-6">
-            <h3 class="text-center text-xs uppercase text-gray-400 font-bold tracking-widest mb-10">Our Leadership Team</h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center mb-12">
+	<div id="page-about" class="page-transition hidden">
+    	<div class="max-w-6xl mx-auto py-12 bg-gray-100 rounded-3xl shadow-sm px-6 border border-gray-200">
+		<h3 class="text-center text-xs uppercase text-yellow-700 font-bold tracking-widest mb-10">Our Leadership Team</h3>
+            	<div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center mb-12">
                 <div>
                     <img src="https://i.ibb.co/Fb7R3hc8/Pallavi-Pic.png" class="w-24 h-32 mx-auto object-cover rounded-xl border border-pink-100 mb-2">
                     <p class="font-bold text-xs">Pallavi Pradhan</p>
-                    <p class="text-pink-500 text-[10px]">Co-Founder</p>
+                    <p class="text-pink-600 text-[10px] font-bold">Co-Founder</p>
                 </div>
                 <div>
                     <img src="https://i.ibb.co/Zkw8f9X/Ruplekha-pic.jpg" class="w-24 h-32 mx-auto object-cover rounded-xl border border-pink-100 mb-2">
                     <p class="font-bold text-xs">Ruplekha Gaikwad</p>
-                    <p class="text-pink-500 text-[10px]">Co-Founder</p>
+                    <p class="text-pink-600 text-[10px] font-bold">Co-Founder</p>
                 </div>
                 <div>
                     <img src="https://i.ibb.co/6RVH5gvP/Neha-Pic.jpg" class="w-24 h-32 mx-auto object-cover rounded-xl border border-pink-100 mb-2">
                     <p class="font-bold text-xs">Neha Pradhan</p>
-                    <p class="text-pink-500 text-[10px]">Co-Founder</p>
+                    <p class="text-pink-600 text-[10px] font-bold">Co-Founder</p>
                 </div>
                 <div>
                     <img src="https://i.ibb.co/XxVbXpLF/Nitesh-Pic.jpg" class="w-24 h-32 mx-auto object-cover rounded-xl border border-pink-100 mb-2">
                     <p class="font-bold text-xs">Nitesh Gaikwad</p>
-                    <p class="text-pink-500 text-[10px]">Technical Head</p>
+                    <p class="text-pink-600 text-[10px] font-bold">Technical Head</p>
                 </div>
             </div>
 
-<section class="grid grid-cols-2 gap-2 my-4">
+
+
+<section class="grid grid-cols-2 gap-3 my-6">
     <!-- Weekend Home Delivery -->
-    <div class="bg-pink-50/50 p-3 rounded-2xl border border-pink-100 flex flex-col items-center text-center">
-        <div class="w-8 h-8 bg-white rounded-xl shadow-sm flex items-center justify-center mb-2 text-pink-500">
-            <i class="fa-solid fa-truck-fast text-sm"></i>
+    <div onclick="showServiceInfo(this, 'Book your order on any day from Monday to Friday and on same weekend order will be delivered within 10 km')" 
+         class="bg-white p-4 rounded-2xl border-2 border-pink-200 shadow-sm flex flex-col items-center text-center transition-transform active:scale-95 cursor-pointer relative">
+        <div class="w-10 h-10 bg-pink-50 rounded-xl flex items-center justify-center mb-3 text-pink-500 border border-pink-100">
+            <i class="fa-solid fa-truck-fast text-lg"></i>
         </div>
-        <p class="text-[9px] font-bold text-blue-900 leading-tight">Weekend Home Delivery</p>
+        <p class="text-[10px] font-extrabold text-blue-900 uppercase tracking-tighter leading-tight">Weekend Home Delivery</p>
     </div>
 
     <!-- Free Delivery -->
-    <div class="bg-pink-50/50 p-3 rounded-2xl border border-pink-100 flex flex-col items-center text-center">
-        <div class="w-8 h-8 bg-white rounded-xl shadow-sm flex items-center justify-center mb-2 text-pink-500">
-            <i class="fa-solid fa-boxes-packing text-sm"></i>
+    <div onclick="showServiceInfo(this, 'Order on above Rs. 1000 and your order will be delivered free')" 
+         class="bg-white p-4 rounded-2xl border-2 border-pink-200 shadow-sm flex flex-col items-center text-center transition-transform active:scale-95 cursor-pointer relative">
+        <div class="w-10 h-10 bg-pink-50 rounded-xl flex items-center justify-center mb-3 text-pink-500 border border-pink-100">
+            <i class="fa-solid fa-boxes-packing text-lg"></i>
         </div>
-        <p class="text-[9px] font-bold text-blue-900 leading-tight">Free Delivery > 1000 Rs.</p>
+        <p class="text-[10px] font-extrabold text-blue-900 uppercase tracking-tighter leading-tight">Free Delivery > 1000 Rs.</p>
     </div>
 
     <!-- 7 Days Return -->
-    <div class="bg-pink-50/50 p-3 rounded-2xl border border-pink-100 flex flex-col items-center text-center">
-        <div class="w-8 h-8 bg-white rounded-xl shadow-sm flex items-center justify-center mb-2 text-pink-500">
-            <i class="fa-solid fa-arrow-rotate-left text-sm"></i>
+    <div onclick="showServiceInfo(this, 'If you have any concern, size issue you can return back it to us')" 
+         class="bg-white p-4 rounded-2xl border-2 border-pink-200 shadow-sm flex flex-col items-center text-center transition-transform active:scale-95 cursor-pointer relative">
+        <div class="w-10 h-10 bg-pink-50 rounded-xl flex items-center justify-center mb-3 text-pink-500 border border-pink-100">
+            <i class="fa-solid fa-arrow-rotate-left text-lg"></i>
         </div>
-        <p class="text-[9px] font-bold text-blue-900 leading-tight">7 Days Return Option</p>
+        <p class="text-[10px] font-extrabold text-blue-900 uppercase tracking-tighter leading-tight">7 Days Return Option</p>
     </div>
 
     <!-- Easy Refund -->
-    <div class="bg-pink-50/50 p-3 rounded-2xl border border-pink-100 flex flex-col items-center text-center">
-        <div class="w-8 h-8 bg-white rounded-xl shadow-sm flex items-center justify-center mb-2 text-pink-500">
-            <i class="fa-solid fa-hand-holding-dollar text-sm"></i>
+    <div onclick="showServiceInfo(this, 'Once your order get return or get cancelled refund will be provided to you within 2 days')" 
+         class="bg-white p-4 rounded-2xl border-2 border-pink-200 shadow-sm flex flex-col items-center text-center transition-transform active:scale-95 cursor-pointer relative">
+        <div class="w-10 h-10 bg-pink-50 rounded-xl flex items-center justify-center mb-3 text-pink-500 border border-pink-100">
+            <i class="fa-solid fa-hand-holding-dollar text-lg"></i>
         </div>
-        <p class="text-[9px] font-bold text-blue-900 leading-tight">Easy Refund in 2 days</p>
+        <p class="text-[10px] font-extrabold text-blue-900 uppercase tracking-tighter leading-tight">Easy Refund in 2 days</p>
     </div>
 </section>
+
+<!-- This is the hidden tooltip element -->
+<div id="service-tooltip" class="fixed hidden z-[500] bg-blue-900 text-white text-[11px] p-3 rounded-xl shadow-xl max-w-[200px] text-center leading-snug animate-fade-in">
+    <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-blue-900 rotate-45"></div>
+    <span id="tooltip-text"></span>
+</div>
            <div class="h-px w-full bg-gray-100 my-8"></div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
@@ -341,7 +405,9 @@
     </footer>
 
 <!-- PRODUCT MODAL (WITH SHARE BUTTON & EXTRA IMAGES SLIDER) -->
+
 <div id="product-modal" class="fixed inset-0 z-[100] hidden bg-black/90 overflow-y-auto">
+    <h2 class="text-xl font-bold mt-4">${p.name}</h2>
     <div class="min-h-screen flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-4xl rounded-3xl overflow-hidden relative flex flex-col md:flex-row animate-bounce-in">
             <button onclick="closeProductModal()" class="absolute top-4 right-4 z-[110] bg-white/80 p-2 rounded-full"><i class="fa-solid fa-xmark text-xl text-pink-500"></i></button>
@@ -370,6 +436,7 @@
         </div>
     </div>
 </div>
+	
 
 <!-- FIXED CUSTOM POPUP -->
 <div id="custom-popup" class="fixed inset-0 items-center justify-center z-[250] hidden bg-black/40 px-4">
@@ -385,21 +452,22 @@
     let cart = [];
     let appliedDiscount = 0;
     const products = [
-        { id: 1, name: "Design #001", price: 750, img: "https://i.ibb.co/60jP12bF/Dress-1.jpg", desc: "Western Long Maxi - White color", fullDesc: "Premium quality Western Long Maxi in white. Perfect for parties and summer outings.", extraImages: ["https://i.ibb.co/60jP12bF/Dress-1.jpg"], sizes: ["L", "XL", "XXL"] },
-        { id: 2, name: "Design #002", price: 599, img: "https://i.ibb.co/0pK39KcD/Dress-2.jpg", desc: "Western Long Maxi - pink color", fullDesc: "Western Long Maxi - White color", fullDesc: "Premium quality Western Long Maxi in Pink.", extraImages: ["https://i.ibb.co/0pK39KcD/Dress-2.jpg"], sizes: ["M", "L", "XL", "XXL"] },
-        { id: 3, name: "Design #003", price: 399, img: "https://i.ibb.co/ksY91SWF/Dress-3.jpg", desc: "India Long Kurti", fullDesc: "Golden print long Indian kurti", extraImages: ["https://i.ibb.co/ksY91SWF/Dress-3.jpg"], sizes: ["L", "XL"] },
-        { id: 4, name: "Design #004", price: 999, img: "https://i.ibb.co/MyJ1bpCr/Dress-4.jpg", desc: "Indian 3 piece dress - Blue color", fullDesc: "Stylish Blue dress with modern design cuts.", extraImages: ["https://i.ibb.co/6krxH42/Dress-4-A.jpg"], sizes: ["M", "L"] },
-        { id: 5, name: "Design #005", price: 699, img: "https://i.ibb.co/CD5j50b/Dress-5.jpg", desc: "Western Long Maxi - Cream & pink color", fullDesc: "Vibrant pink designer outfit. Soft on skin and premium fabric.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
-        { id: 6, name: "Design #006", price: 799, img: "https://i.ibb.co/JRwXkvVG/Dress-6.jpg", desc: "Cord set - light gray", fullDesc: "tranding office wear dress & stylish.", extraImages: [], sizes: ["M", "XL", "XXL"] },
-        { id: 7, name: "Design #007", price: 799, img: "https://i.ibb.co/23KhVnbh/Dress-7.jpg", desc: "Cord set - multicolour", fullDesc: "tranding mirrored dress & stylish look.", extraImages: [], sizes: ["M", "L", "XXL"] },
-        { id: 8, name: "Design #008", price: 499, img: "https://i.ibb.co/cXs6wJZh/Dress-8.jpg", desc: "Kurta dress Suit - Orange & white", fullDesc: "Dailywear kurta plazo set with affrortable rates.", extraImages: ["https://i.ibb.co/Fbwf5GDr/Dress-8-A.jpg"], sizes: ["M", "L", "XL", "XXL"] },
-        { id: 9, name: "Design #009", price: 499, img: "https://i.ibb.co/h1Lg1Yhk/Dress-9.jpg", desc: "Kurta dress Suit - Black", fullDesc: "Dailywear kurta plazo set with affrortable rates.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
-        { id: 10, name: "Design #010", price: 499, img: "https://i.ibb.co/DfsyJk1v/Dress-10.jpg", desc: "Cord set - Red/Green", fullDesc: "tranding office wear dress & stylish.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
-        { id: 11, name: "Design #011", price: 499, img: "https://i.ibb.co/bgkMBp6t/Dress-11.jpg", desc: "Cord set - Black", fullDesc: "tranding office wear dress & stylish.", extraImages: ["https://i.ibb.co/Y4yb8pKf/Dress-11-A.jpg"], sizes: ["M", "L", "XL", "XXL"] },
-        { id: 12, name: "Design #012", price: 499, img: "https://i.ibb.co/Bb1CRft/Dress-12.jpg", desc: "Cord set - Peacock Green", fullDesc: "tranding office wear dress & stylish.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
-        { id: 13, name: "Design #013", price: 499, img: "https://i.ibb.co/27L7b9LF/Dress-13.jpg", desc: "Indian 3 piece dress - Light brown color", fullDesc: "Stylish dress with comfort.", extraImages: ["https://i.ibb.co/xqG9N8V7/Dress-13-A.jpg"], sizes: ["M", "L", "XL", "XXL"] },
-        { id: 14, name: "Design #014", price: 499, img: "https://i.ibb.co/jtcwV6Y/Dress-14.jpg", desc: "Indian 3 piece dress - Green color", fullDesc: "Stylish Green dress with modern design cuts.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] }
+        { id: 1, name: "Design #001", price: 750, img: "https://i.ibb.co/60jP12bF/Dress-1.jpg", category: "Western", desc: "Western Long Maxi - White color", fullDesc: "Premium quality Western Long Maxi in white. Perfect for parties and summer outings.", extraImages: ["https://i.ibb.co/60jP12bF/Dress-1.jpg"], sizes: ["L", "XL", "XXL"] },
+        { id: 2, name: "Design #002", price: 599, img: "https://i.ibb.co/0pK39KcD/Dress-2.jpg", category: "Western", desc: "Western Long Maxi - pink color", fullDesc: "Western Long Maxi - White color", fullDesc: "Premium quality Western Long Maxi in Pink.", extraImages: ["https://i.ibb.co/0pK39KcD/Dress-2.jpg"], sizes: ["M", "L", "XL", "XXL"] },
+        { id: 3, name: "Design #003", price: 399, img: "https://i.ibb.co/ksY91SWF/Dress-3.jpg", category: "Indian", desc: "India Long Kurti", fullDesc: "Golden print long Indian kurti", extraImages: ["https://i.ibb.co/ksY91SWF/Dress-3.jpg"], sizes: ["L", "XL"] },
+        { id: 4, name: "Design #004", price: 999, img: "https://i.ibb.co/MyJ1bpCr/Dress-4.jpg", category: "Indian", desc: "Indian 3 piece dress - Blue color", fullDesc: "Stylish Blue dress with modern design cuts.", extraImages: ["https://i.ibb.co/6krxH42/Dress-4-A.jpg"], sizes: ["M", "L"] },
+        { id: 5, name: "Design #005", price: 699, img: "https://i.ibb.co/CD5j50b/Dress-5.jpg", category: "Western", desc: "Western Long Maxi - Cream & pink color", fullDesc: "Vibrant pink designer outfit. Soft on skin and premium fabric.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
+        { id: 6, name: "Design #006", price: 799, img: "https://i.ibb.co/JRwXkvVG/Dress-6.jpg", category: "Indian", desc: "Cord set - light gray", fullDesc: "tranding office wear dress & stylish.", extraImages: [], sizes: ["M", "XL", "XXL"] },
+        { id: 7, name: "Design #007", price: 799, img: "https://i.ibb.co/23KhVnbh/Dress-7.jpg", category: "Indian", desc: "Cord set - multicolour", fullDesc: "tranding mirrored dress & stylish look.", extraImages: [], sizes: ["M", "L", "XXL"] },
+        { id: 8, name: "Design #008", price: 499, img: "https://i.ibb.co/cXs6wJZh/Dress-8.jpg", category: "Indian", desc: "Kurta dress Suit - Orange & white", fullDesc: "Dailywear kurta plazo set with affrortable rates.", extraImages: ["https://i.ibb.co/Fbwf5GDr/Dress-8-A.jpg"], sizes: ["M", "L", "XL", "XXL"] },
+        { id: 9, name: "Design #009", price: 499, img: "https://i.ibb.co/h1Lg1Yhk/Dress-9.jpg", category: "Indian", desc: "Kurta dress Suit - Black", fullDesc: "Dailywear kurta plazo set with affrortable rates.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
+        { id: 10, name: "Design #010", price: 499, img: "https://i.ibb.co/DfsyJk1v/Dress-10.jpg", category: "Indian", desc: "Cord set - Red/Green", fullDesc: "tranding office wear dress & stylish.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
+        { id: 11, name: "Design #011", price: 499, img: "https://i.ibb.co/bgkMBp6t/Dress-11.jpg", category: "Indian", desc: "Cord set - Black", fullDesc: "tranding office wear dress & stylish.", extraImages: ["https://i.ibb.co/Y4yb8pKf/Dress-11-A.jpg"], sizes: ["M", "L", "XL", "XXL"] },
+        { id: 12, name: "Design #012", price: 499, img: "https://i.ibb.co/Bb1CRft/Dress-12.jpg", category: "Indian", desc: "Cord set - Peacock Green", fullDesc: "tranding office wear dress & stylish.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
+        { id: 13, name: "Design #013", price: 499, img: "https://i.ibb.co/27L7b9LF/Dress-13.jpg", category: "Indian", desc: "Indian 3 piece dress - Light brown color", fullDesc: "Stylish dress with comfort.", extraImages: ["https://i.ibb.co/xqG9N8V7/Dress-13-A.jpg"], sizes: ["M", "L", "XL", "XXL"] },
+        { id: 14, name: "Design #014", price: 499, img: "https://i.ibb.co/jtcwV6Y/Dress-14.jpg", category: "Indian", desc: "Indian 3 piece dress - Green color", fullDesc: "Stylish Green dress with modern design cuts.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] }
     ];
+
 
     function renderCatalog(filtered = products) {
         const container = document.getElementById('catalog-container');
@@ -446,7 +514,15 @@
         // Handle Extra Images Slider
         const images = [product.img, ...(product.extraImages || [])];
         totalSlides = images.length;
-        document.getElementById('modal-slider-wrapper').innerHTML = images.map(img => `<div class="slider-item"><img src="${img}" class="w-full aspect-[3/4] object-cover"></div>`).join('');
+document.getElementById('modal-slider-wrapper').innerHTML = images.map(img => 
+    `<div class="slider-item">
+        <img src="${img}" 
+             onclick="openFullscreen('${img}')" 
+             class="w-full aspect-[3/4] object-cover cursor-zoom-in" 
+             alt="Dress Image">
+    </div>`).join('');
+
+
         document.getElementById('modal-thumbnails').innerHTML = images.map((img, i) => `<img src="${img}" onclick="goToSlide(${i})" class="w-14 h-18 object-cover rounded-lg cursor-pointer border-2 border-transparent">`).join('');
         updateSliderPosition();
 
@@ -674,6 +750,121 @@ function renderWishlist() {
 
     updateWishlistCount();
     renderCatalog();
+
+
+function applyFilters() {
+    // 1. Get all current filter values
+    const searchTerm = document.getElementById('catalogSearch').value.toLowerCase();
+    const type = document.getElementById('filter-type').value;
+    const priceRange = document.getElementById('filter-price').value;
+    const sortOrder = document.getElementById('sort-order').value;
+
+    // 2. Run the filtering logic
+    let filtered = products.filter(p => {
+        const matchesSearch = p.name.toLowerCase().includes(searchTerm) || 
+                              p.desc.toLowerCase().includes(searchTerm);
+        
+        // This matches the 'category' you added in Step 1
+        const matchesType = (type === 'all') || (p.category === type);
+        
+        let matchesPrice = true;
+        if (priceRange !== 'all') {
+            const [min, max] = priceRange.split('-').map(Number);
+            matchesPrice = p.price >= min && p.price <= max;
+        }
+
+        return matchesSearch && matchesType && matchesPrice;
+    });
+
+    // 3. Run the sorting logic
+    if (sortOrder === 'price-low') {
+        filtered.sort((a, b) => a.price - b.price);
+    } else if (sortOrder === 'price-high') {
+        filtered.sort((a, b) => b.price - a.price);
+    } else if (sortOrder === 'name-az') {
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortOrder === 'name-za') {
+        filtered.sort((a, b) => b.name.localeCompare(a.name));
+    }
+
+    // 4. Update the screen
+    renderCatalog(filtered);
+}
+
+
+function openFullscreen(imageSrc) {
+    const overlay = document.getElementById('image-overlay');
+    const fullImg = document.getElementById('fullscreen-img');
+    
+    if (overlay && fullImg) {
+        fullImg.src = imageSrc; // Give the zoom layer the image URL
+        overlay.classList.remove('hidden'); // Make the layer visible
+        
+        // IMPORTANT: Prevent the product modal from scrolling in the background
+        document.getElementById('product-modal').style.overflow = 'hidden';
+    }
+}
+
+function closeFullscreen() {
+    const overlay = document.getElementById('image-overlay');
+    if (overlay) {
+        overlay.classList.add('hidden'); // Hide the layer
+        
+        // Return scrolling back to the product modal
+        document.getElementById('product-modal').style.overflow = 'auto';
+    }
+}
+
+
+function showServiceInfo(element, message) {
+    const tooltip = document.getElementById('service-tooltip');
+    const textSpan = document.getElementById('tooltip-text');
+    
+    // Set the text
+    textSpan.innerText = message;
+    
+    // Get position of the clicked box
+    const rect = element.getBoundingClientRect();
+    
+    // Position the tooltip above the box
+    tooltip.style.left = `${rect.left + (rect.width / 2) - 100}px`; // Centers it
+    tooltip.style.top = `${rect.top - 80}px`; // Sits above the box
+    
+    // Show it
+    tooltip.classList.remove('hidden');
+    
+    // Hide it automatically after 4 seconds
+    setTimeout(() => {
+        tooltip.classList.add('hidden');
+    }, 4000);
+}
+
+// Also hide it if user clicks anywhere else
+window.addEventListener('click', function(e) {
+    const tooltip = document.getElementById('service-tooltip');
+    if (!e.target.closest('[onclick^="showServiceInfo"]')) {
+        tooltip.classList.add('hidden');
+    }
+});
+
+
 </script>
+
+<!-- THE ZOOM LAYER: Must be at the very end of your body -->
+<div id="image-overlay" 
+     class="fixed inset-0 bg-black/95 z-[9999] hidden flex flex-col items-center justify-center p-4 cursor-pointer" 
+     onclick="closeFullscreen()">
+    
+    <!-- Close Button -->
+    <div class="absolute top-10 right-10 text-white text-5xl font-light">&times;</div>
+    
+    <!-- The Image Container -->
+    <img id="fullscreen-img" src="" class="max-w-full max-h-[85vh] object-contain shadow-2xl transition-transform duration-300">
+    
+    <p class="mt-8 text-white/50 text-[10px] uppercase tracking-[0.3em]">Tap anywhere to close</p>
+</div>
+
+
+
 </body>
 </html>
