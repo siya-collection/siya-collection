@@ -444,21 +444,21 @@
     let cart = [];
     let appliedDiscount = 0;
     const products = [
-        { id: 1, name: "Design #001", price: 750, img: "https://i.ibb.co/60jP12bF/Dress-1.jpg", category: "Western", desc: "Western Long Maxi - White color", fullDesc: "Premium quality Western Long Maxi in white. Perfect for parties and summer outings.", extraImages: ["https://i.ibb.co/60jP12bF/Dress-1.jpg"], sizes: ["L", "XL", "XXL"] },
+        { id: 1, name: "Design #001", price: 750, img: "https://i.ibb.co/60jP12bF/Dress-1.jpg", category: "Western", desc: "Western Long Maxi - White color", fullDesc: "Premium quality Western Long Maxi in white. Perfect for parties and summer outings.", extraImages: ["https://i.ibb.co/60jP12bF/Dress-1.jpg"], sizes: ["L", "XL", "XXL", "M (OUT OF STOCK)"] },
         { id: 2, name: "Design #002", price: 599, img: "https://i.ibb.co/0pK39KcD/Dress-2.jpg", category: "Western", desc: "Western Long Maxi - pink color", fullDesc: "Western Long Maxi - White color", fullDesc: "Premium quality Western Long Maxi in Pink.", extraImages: ["https://i.ibb.co/0pK39KcD/Dress-2.jpg"], sizes: ["M", "L", "XL", "XXL"] },
-        { id: 3, name: "Design #003", price: 399, img: "https://i.ibb.co/ksY91SWF/Dress-3.jpg", category: "Indian", desc: "India Long Kurti", fullDesc: "Golden print long Indian kurti", extraImages: ["https://i.ibb.co/ksY91SWF/Dress-3.jpg"], sizes: ["L", "XL"] },
-        { id: 4, name: "Design #004", price: 999, img: "https://i.ibb.co/MyJ1bpCr/Dress-4.jpg", category: "Indian", desc: "Indian 3 piece dress - Blue color", fullDesc: "Stylish Blue dress with modern design cuts.", extraImages: ["https://i.ibb.co/6krxH42/Dress-4-A.jpg"], sizes: ["M", "L"] },
+        { id: 3, name: "Design #003", price: 399, img: "https://i.ibb.co/ksY91SWF/Dress-3.jpg", category: "Indian", desc: "India Long Kurti", fullDesc: "Golden print long Indian kurti", extraImages: ["https://i.ibb.co/ksY91SWF/Dress-3.jpg"], sizes: ["L", "XL", "M (OUT OF STOCK)", "XXL (OUT OF STOCK)"] },
+        { id: 4, name: "Design #004", price: 999, img: "https://i.ibb.co/MyJ1bpCr/Dress-4.jpg", category: "Indian", desc: "Indian 3 piece dress - Blue color", fullDesc: "Stylish Blue dress with modern design cuts.", extraImages: ["https://i.ibb.co/6krxH42/Dress-4-A.jpg"], sizes: ["M", "L", "XL (OUT OF STOCK)", "XXL (OUT OF STOCK)"] },
         { id: 5, name: "Design #005", price: 699, img: "https://i.ibb.co/CD5j50b/Dress-5.jpg", category: "Western", desc: "Western Long Maxi - Cream & pink color", fullDesc: "Vibrant pink designer outfit. Soft on skin and premium fabric.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
         { id: 6, name: "Design #006", price: 799, img: "https://i.ibb.co/JRwXkvVG/Dress-6.jpg", category: "Indian", desc: "Cord set - light gray", fullDesc: "tranding office wear dress & stylish.", extraImages: [], sizes: ["M", "XL", "XXL"] },
         { id: 7, name: "Design #007", price: 799, img: "https://i.ibb.co/23KhVnbh/Dress-7.jpg", category: "Indian", desc: "Cord set - multicolour", fullDesc: "tranding mirrored dress & stylish look.", extraImages: [], sizes: ["M", "L", "XXL"] },
-        { id: 8, name: "Design #008", price: 499, img: "https://i.ibb.co/cXs6wJZh/Dress-8.jpg", category: "Indian", desc: "Kurta dress Suit - Orange & white", fullDesc: "Dailywear kurta plazo set with affrortable rates.", extraImages: ["https://i.ibb.co/Fbwf5GDr/Dress-8-A.jpg"], sizes: ["M", "L", "XL", "XXL"] },
+        { id: 8, name: "Design #008", price: 499, img: "https://i.ibb.co/cXs6wJZh/Dress-8.jpg", category: "Indian", desc: "Kurta dress Suit - Orange & white", fullDesc: "Dailywear kurta plazo set with affrortable rates.", extraImages: ["https://i.ibb.co/3YYzYBhj/Dress-8-A.jpg"], sizes: ["M", "L", "XL", "XXL"] },
         { id: 9, name: "Design #009", price: 499, img: "https://i.ibb.co/h1Lg1Yhk/Dress-9.jpg", category: "Indian", desc: "Kurta dress Suit - Black", fullDesc: "Dailywear kurta plazo set with affrortable rates.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
         { id: 10, name: "Design #010", price: 499, img: "https://i.ibb.co/DfsyJk1v/Dress-10.jpg", category: "Indian", desc: "Cord set - Red/Green", fullDesc: "tranding office wear dress & stylish.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
         { id: 11, name: "Design #011", price: 499, img: "https://i.ibb.co/bgkMBp6t/Dress-11.jpg", category: "Indian", desc: "Cord set - Black", fullDesc: "tranding office wear dress & stylish.", extraImages: ["https://i.ibb.co/Y4yb8pKf/Dress-11-A.jpg"], sizes: ["M", "L", "XL", "XXL"] },
         { id: 12, name: "Design #012", price: 499, img: "https://i.ibb.co/Bb1CRft/Dress-12.jpg", category: "Indian", desc: "Cord set - Peacock Green", fullDesc: "tranding office wear dress & stylish.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
         { id: 13, name: "Design #013", price: 499, img: "https://i.ibb.co/27L7b9LF/Dress-13.jpg", category: "Indian", desc: "Indian 3 piece dress - Light brown color", fullDesc: "Stylish dress with comfort.", extraImages: ["https://i.ibb.co/xqG9N8V7/Dress-13-A.jpg"], sizes: ["M", "L", "XL", "XXL"] },
         { id: 14, name: "Design #014", price: 499, img: "https://i.ibb.co/jtcwV6Y/Dress-14.jpg", category: "Indian", desc: "Indian 3 piece dress - Green color", fullDesc: "Stylish Green dress with modern design cuts.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
-		{ id: 15, name: "Design #015", price: 799, img: "https://i.ibb.co/Jjw44P8n/Dress-15.jpg", category: "Indian", desc: "Cord Set - Floral off white", fullDesc: "Tranding cord set for office wear - classic color.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
+        { id: 15, name: "Design #015", price: 799, img: "https://i.ibb.co/Jjw44P8n/Dress-15.jpg", category: "Indian", desc: "Cord Set - Floral off white", fullDesc: "Tranding cord set for office wear - classic color.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
         { id: 16, name: "Design #016", price: 599, img: "https://i.ibb.co/Gv5Xzjqg/Dress-16.jpg", category: "Western", desc: "Western One Piece - Floral Pink color", fullDesc: "Western dress with Anarkali pattern floral and pink color.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
         { id: 17, name: "Design #017", price: 499, img: "https://i.ibb.co/PzhzrLTh/Dress-17.jpg", category: "Indian", desc: "Chikankari - Blue Color", fullDesc: "Indian chikankari kurti tranding look.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
         { id: 18, name: "Design #018", price: 499, img: "https://i.ibb.co/LdRrqhMz/Dress-18.jpg", category: "Indian", desc: "Chikankari - Yellow Color", fullDesc: "Indian chikankari kurti tranding look.", extraImages: [], sizes: ["M", "L", "XL", "XXL"] },
@@ -476,35 +476,57 @@
         { id: 30, name: "Design #030", price: 499, img: "https://i.ibb.co/gbcxB8cG/Dress-30.jpg", category: "Indian", desc: "Indian 3 piece suit - Blue color", fullDesc: "Blue color suit with white Geometric print.", extraImages: [], sizes: ["S", "M"] },
         { id: 31, name: "Design #031", price: 549, img: "https://i.ibb.co/TxfqbD8k/Dress-31.jpg", category: "Indian", desc: "Indian 3 piece suit - White color", fullDesc: "White color suit with yellow floral print.", extraImages: [], sizes: ["S", "M"] }
 
+
+
     ];
 
 
-    function renderCatalog(filtered = products) {
-        const container = document.getElementById('catalog-container');
-        const wishlist = JSON.parse(localStorage.getItem('siya_wishlist') || '[]');
-        container.innerHTML = filtered.map(p => {
-            const isLiked = wishlist.includes(p.id);
-            return `
-                <div class="bg-white rounded-xl border border-gray-100 p-2 relative shadow-sm">
-                    <button onclick="toggleWishlist(${p.id}, event)" class="absolute top-2 right-2 z-10 w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center">
-                        <i class="${isLiked ? 'fa-solid text-red-500' : 'fa-regular text-gray-400'} fa-heart"></i>
-                    </button>
-                    <div onclick="openProductModal(${p.id})" class="cursor-pointer">
-                        <img src="${p.img}" class="aspect-[3/4] object-cover rounded-lg w-full">
-                        <div class="mt-2">
-                            <h3 class="text-[10px] font-bold text-pink-500 uppercase">${p.name}</h3>
-                            <p class="text-[9px] text-gray-500 truncate">${p.desc}</p>
-                            <p class="text-xs font-bold mt-1">Rs. ${p.price}</p>
-                        </div>
+function renderCatalog(filtered = products) {
+    const container = document.getElementById('catalog-container');
+    const wishlist = JSON.parse(localStorage.getItem('siya_wishlist') || '[]');
+    
+    container.innerHTML = filtered.map(p => {
+        const isLiked = wishlist.includes(p.id);
+        
+        return `
+            <div class="bg-white rounded-xl border border-gray-100 p-2 relative shadow-sm">
+                <!-- Wishlist Heart Button -->
+                <button onclick="toggleWishlist(${p.id}, event)" class="absolute top-2 right-2 z-10 w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center">
+                    <i class="${isLiked ? 'fa-solid text-red-500' : 'fa-regular text-gray-400'} fa-heart"></i>
+                </button>
+                
+                <!-- Clickable Product Image and Info -->
+                <div onclick="openProductModal(${p.id})" class="cursor-pointer">
+                    <img src="${p.img}" class="aspect-[3/4] object-cover rounded-lg w-full">
+                    <div class="mt-2">
+                        <h3 class="text-[10px] font-bold text-pink-500 uppercase">${p.name}</h3>
+                        <p class="text-[9px] text-gray-500 truncate">${p.desc}</p>
+                        <p class="text-xs font-bold mt-1">Rs. ${p.price}</p>
                     </div>
-            <label class="block text-[8px] font-bold mt-4 uppercase text-gray-400">Select Size:</label>
-                    <select id="size-${p.id}" class="w-full mt-2 text-[10px] p-1 border rounded bg-gray-50 font-bold">
-                        ${p.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
-                    </select>
-                    <button onclick="addToCartWithSize('${p.name}', ${p.price}, '${p.img}', 'size-${p.id}')" class="w-full mt-2 bg-pink-500 text-white py-2 rounded-lg text-[10px] font-bold">Add to Bag</button>
-                </div>`;
-        }).join('');
-    }
+                </div>
+
+                <!-- Size Selection Label -->
+                <label class="block text-[8px] font-bold mt-4 uppercase text-gray-400">Select Size:</label>
+                
+                <!-- Size Dropdown with Red Out-of-Stock Styling -->
+                <select id="size-${p.id}" class="w-full mt-2 text-[10px] p-1 border rounded bg-gray-50 font-bold">
+                    ${p.sizes.map(s => {
+                        const isOut = s.toUpperCase().includes("OUT OF STOCK");
+                        // If size is out of stock, it's disabled and shown in red
+                        return `<option value="${s}" ${isOut ? 'disabled style="color: #ef4444;"' : ''}>${s}</option>`;
+                    }).join('')}
+                </select>
+
+                <!-- Add to Bag Button -->
+                <button onclick="addToCartWithSize('${p.name}', ${p.price}, '${p.img}', 'size-${p.id}')" 
+                        class="w-full mt-2 bg-pink-500 text-white py-2 rounded-lg text-[10px] font-bold">
+                    Add to Bag
+                </button>
+            </div>`;
+    }).join('');
+}
+
+
 
     function openProductModal(productId) {
         const product = products.find(p => p.id === productId);
@@ -728,17 +750,14 @@ function renderWishlist() {
     const wishlistIds = JSON.parse(localStorage.getItem('siya_wishlist') || '[]');
     const wishProducts = products.filter(p => wishlistIds.includes(p.id));
     
-    // Toggle the empty state message
     document.getElementById('wishlist-empty').classList.toggle('hidden', wishProducts.length > 0);
     
     container.innerHTML = wishProducts.map(p => `
         <div class="bg-white rounded-xl border border-gray-100 p-2 relative shadow-sm">
-            <!-- Heart Button to Remove from Wishlist -->
             <button onclick="toggleWishlist(${p.id}, event)" class="absolute top-2 right-2 z-10 w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center">
                 <i class="fa-solid text-red-500 fa-heart"></i>
             </button>
             
-            <!-- Click Image to Open Modal -->
             <div onclick="openProductModal(${p.id})" class="cursor-pointer">
                 <img src="${p.img}" class="aspect-[3/4] object-cover rounded-lg w-full">
                 <div class="mt-2">
@@ -748,18 +767,22 @@ function renderWishlist() {
                 </div>
             </div>
 
-            <!-- Size Selection Dropdown -->
+            <label class="block text-[8px] font-bold mt-4 uppercase text-gray-400">Select Size:</label>
             <select id="wish-size-${p.id}" class="w-full mt-2 text-[10px] p-1 border rounded bg-gray-50 font-bold">
-                ${p.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
+                ${p.sizes.map(s => {
+                    const isOut = s.toUpperCase().includes("OUT OF STOCK");
+                    return `<option value="${s}" ${isOut ? 'disabled style="color: #ef4444;"' : ''}>${s}</option>`;
+                }).join('')}
             </select>
 
-            <!-- Add to Bag Button -->
             <button onclick="addToCartWithSize('${p.name}', ${p.price}, '${p.img}', 'wish-size-${p.id}')" 
                     class="w-full mt-2 bg-pink-500 text-white py-2 rounded-lg text-[10px] font-bold">
                 Add to Bag
             </button>
         </div>`).join('');
 }
+
+
 
     function toggleMenu(show) {
         document.getElementById('sidebar').classList.toggle('-translate-x-full', !show);
