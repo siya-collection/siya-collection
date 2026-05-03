@@ -243,7 +243,7 @@
 	<div id="page-about" class="page-transition hidden">
     	<div class="max-w-6xl mx-auto py-12 bg-gray-100 rounded-3xl shadow-sm px-6 border border-gray-200">
 		<h3 class="text-center text-xs uppercase text-yellow-700 font-bold tracking-widest mb-10">Our Leadership Team</h3>
-            	<div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center mb-12">
+            	<div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center mb-16 p-6 bg-white/50 backdrop-blur-sm rounded-3xl border border-gray-100 shadow-sm">	
                 <div>
                     <img src="https://i.ibb.co/Fb7R3hc8/Pallavi-Pic.png" class="w-24 h-32 mx-auto object-cover rounded-xl border border-pink-100 mb-2">
                     <p class="font-bold text-xs">Pallavi Pradhan</p>
@@ -566,17 +566,36 @@ document.getElementById('modal-slider-wrapper').innerHTML = images.map(img =>
         popup.classList.remove('flex');
     }
 
-    function closeProductModal() { document.getElementById('product-modal').classList.add('hidden'); document.body.style.overflow = 'auto'; }
-
-    function navigateTo(pageId) {
-        toggleMenu(false);
-        ['home', 'catalog', 'payment', 'about', 'wishlist'].forEach(p => document.getElementById(`page-${p}`)?.classList.add('hidden'));
-        document.getElementById(`page-${pageId}`)?.classList.remove('hidden');
-        if(pageId === 'catalog') renderCatalog();
-        if(pageId === 'payment') renderCart();
-        if(pageId === 'wishlist') renderWishlist();
-        window.scrollTo(0,0);
+function closeProductModal() {
+    document.getElementById('product-modal').classList.add('hidden');
+    document.body.style.overflow = 'auto';
+    document.documentElement.style.overflow = 'auto';
+    
+    // Clean up the URL hash without triggering a reload
+    if (window.location.hash === "#product") {
+        history.replaceState({ page: 'catalog' }, "", "#catalog");
     }
+}
+
+
+function navigateTo(pageId) {
+    toggleMenu(false);
+    ['home', 'catalog', 'payment', 'about', 'wishlist'].forEach(p => {
+        const el = document.getElementById(`page-${p}`);
+        if (el) el.classList.add('hidden');
+    });
+    
+    const targetPage = document.getElementById(`page-${pageId}`);
+    if (targetPage) targetPage.classList.remove('hidden');
+
+    // Add a history entry so the back button works
+    history.pushState({ page: pageId }, "", `#${pageId}`);
+    
+    if(pageId === 'catalog') renderCatalog();
+    if(pageId === 'payment') renderCart();
+    if(pageId === 'wishlist') renderWishlist();
+    window.scrollTo(0,0);
+}
 
     function renderCart() {
         const container = document.getElementById('cart-items');
@@ -838,6 +857,38 @@ window.addEventListener('click', function(e) {
         tooltip.classList.add('hidden');
     }
 });
+
+
+window.onpopstate = function(event) {
+        const productModal = document.getElementById('product-modal');
+        const imageOverlay = document.getElementById('image-overlay');
+
+        if (imageOverlay && !imageOverlay.classList.contains('hidden')) {
+            closeFullscreen();
+            history.pushState(null, "", location.href); 
+            return;
+        }
+
+        if (productModal && !productModal.classList.contains('hidden')) {
+            closeProductModal();
+            navigateTo('catalog');
+            return;
+        }
+
+        const homePage = document.getElementById('page-home');
+        if (homePage && !homePage.classList.contains('hidden')) {
+            navigateTo('catalog');
+            return;
+        }
+    };
+
+    window.onload = function() {
+        if (location.hash === "" || location.hash === "#home") {
+            history.replaceState({ page: 'home' }, "", "#home");
+        }
+    };
+
+
 </script>
 
 <script>
@@ -862,7 +913,7 @@ window.addEventListener('click', function(e) {
         });
     })();
 </script>
-	
+
 <!-- THE ZOOM LAYER: Must be at the very end of your body -->
 <div id="image-overlay" 
      class="fixed inset-0 bg-black/95 z-[9999] hidden flex flex-col items-center justify-center p-4 cursor-pointer" 
