@@ -54,7 +54,23 @@
 
     </style>
 </head>
+
+
+
+
+
+
+
+
+
 <body class="bg-gray-50 flex flex-col min-h-screen" id="top">
+
+<!-- Reusable Back Button Template for sections -->
+<div id="back-btn-template" class="hidden">
+    <button onclick="navigateTo('catalog')" class="mb-4 flex items-center gap-2 text-pink-500 font-bold text-xs uppercase tracking-tight hover:text-pink-600 transition-all">
+        <i class="fa-solid fa-arrow-left"></i> Back to Catalog
+    </button>
+</div>
 
 <header class="bg-white shadow-sm sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 py-2 flex flex-col items-center">
@@ -122,6 +138,10 @@
             </div>
         </section>        
         <section class="mb-8"> 
+            <!-- BACK BUTTON HOME PAGE -->
+            <button onclick="navigateTo('catalog')" class="mb-4 flex items-center gap-2 text-pink-500 font-bold text-[10px] uppercase tracking-widest">
+                <i class="fa-solid fa-arrow-left text-xs"></i> Back to Catalog
+            </button>
             <h2 class="text-xl font-bold mb-6 border-l-4 border-pink-500 pl-3">
                 <span class="text-blue-800 uppercase text-sm tracking-widest block mb-1">Latest Branded Collection</span>
                 <span class="text-blue-500 text-sm font-semibold">Contact: +91 9834524074</span>
@@ -134,18 +154,11 @@
         </section>
     </div>
 
-
-
-
 <!-- Catalog Page -->
-    <div id="page-catalog" class="page-transition"> <!-- Removed 'hidden' as per your previous request -->
+    <div id="page-catalog" class="page-transition"> 
         <h2 class="text-2xl font-bold mb-4 text-center text-gray-700 uppercase tracking-widest">Our Catalog</h2>
         
-        <!-- PASTE THE FILTER AND SORT BAR HERE -->
-<!-- Optimized Filter and Sort Bar for Mobile -->
 <div class="grid grid-cols-2 gap-2 p-3 bg-white sticky top-0 z-20 border-b mb-4 max-w-6xl mx-auto rounded-xl shadow-sm">
-    
-    <!-- Filter by Type -->
     <select id="filter-type" onchange="applyFilters()" 
         class="w-full bg-gray-50 p-2 border border-gray-200 rounded-lg text-[9px] font-bold uppercase text-gray-600 appearance-none focus:border-pink-300 outline-none">
         <option value="all">Types-ALL</option>
@@ -153,8 +166,6 @@
         <option value="Western">Western</option>
         <option value="Indian">Indian</option>
     </select>
-
-    <!-- Filter by Price Range -->
     <select id="filter-price" onchange="applyFilters()" 
         class="w-full bg-gray-50 p-2 border border-gray-200 rounded-lg text-[9px] font-bold uppercase text-gray-600 appearance-none focus:border-pink-300 outline-none">
         <option value="all">Prices-ALL</option>
@@ -162,10 +173,7 @@
         <option value="501-1000">501-1000</option>
         <option value="1001-9999">Over 1000</option>
     </select>
-
 </div>
-
-        <!-- Keep your existing search bar below it -->
         <div class="max-w-md mx-auto mb-8 px-4">
             <div class="relative">
                 <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
@@ -173,14 +181,15 @@
             </div>
         </div>
         <div id="catalog-container" class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto mb-8"></div>
-   
 </div>
-
-
 
     <!-- Payment/Cart Page -->
     <div id="page-payment" class="page-transition hidden">
         <div class="max-w-2xl mx-auto bg-white p-6 rounded-3xl shadow-lg border">
+            <!-- BACK BUTTON CART PAGE -->
+            <button onclick="navigateTo('catalog')" class="mb-4 flex items-center gap-2 text-pink-500 font-bold text-[10px] uppercase tracking-widest">
+                <i class="fa-solid fa-arrow-left text-xs"></i> Back to Catalog
+            </button>
             <div class="mb-8 bg-pink-50 p-4 rounded-2xl border border-pink-100">
                 <h3 class="text-center text-[12px] font-bold text-pink-500 uppercase tracking-widest mb-4">5 Easy Steps to Shop</h3>
                 <div class="grid grid-cols-5 gap-1 text-[7px] md:text-[9px] text-center font-bold uppercase">
@@ -218,12 +227,10 @@
 </h2>
 
 <div class="bg-pink-50 p-6 rounded-3xl text-center mb-6 border border-pink-100 shadow-sm">
-    <!-- QR Code Container with white border glow -->
     <div class="relative inline-block p-4 bg-white rounded-2xl shadow-md mb-4">
         <img src="https://i.ibb.co/VWh3PbD7/Gpay-Siya-Collection.jpg" 
              class="w-32 h-32 mx-auto rounded-lg">
     </div>
-    
     <p class="text-[10px] font-bold text-blue-900 uppercase tracking-tight">Scan to pay via any UPI App</p>
     <div class="flex justify-center gap-4 mt-2 opacity-60">
         <i class="fa-brands fa-google-pay text-lg"></i>
@@ -238,10 +245,13 @@
         </div>
     </div>
 
-
     <!-- About Page -->
 	<div id="page-about" class="page-transition hidden">
     	<div class="max-w-6xl mx-auto py-12 bg-gray-100 rounded-3xl shadow-sm px-6 border border-gray-200">
+        <!-- BACK BUTTON ABOUT PAGE -->
+        <button onclick="navigateTo('catalog')" class="mb-4 flex items-center gap-2 text-pink-500 font-bold text-[10px] uppercase tracking-widest">
+            <i class="fa-solid fa-arrow-left text-xs"></i> Back to Catalog
+        </button>
 		<h3 class="text-center text-xs uppercase text-yellow-700 font-bold tracking-widest mb-10">Our Leadership Team</h3>
             	<div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center mb-16 p-6 bg-white/50 backdrop-blur-sm rounded-3xl border border-gray-100 shadow-sm">	
                 <div>
@@ -266,10 +276,7 @@
                 </div>
             </div>
 
-
-
 <section class="grid grid-cols-2 gap-3 my-6">
-    <!-- Weekend Home Delivery -->
     <div onclick="showServiceInfo(this, 'Book your order on any day from Monday to Friday and on same weekend order will be delivered within 10 km')" 
          class="bg-white p-4 rounded-2xl border-2 border-pink-200 shadow-sm flex flex-col items-center text-center transition-transform active:scale-95 cursor-pointer relative">
         <div class="w-10 h-10 bg-pink-50 rounded-xl flex items-center justify-center mb-3 text-pink-500 border border-pink-100">
@@ -277,8 +284,6 @@
         </div>
         <p class="text-[10px] font-extrabold text-blue-900 uppercase tracking-tighter leading-tight">Weekend Home Delivery</p>
     </div>
-
-    <!-- Free Delivery -->
     <div onclick="showServiceInfo(this, 'Order on above Rs. 1000 and your order will be delivered free')" 
          class="bg-white p-4 rounded-2xl border-2 border-pink-200 shadow-sm flex flex-col items-center text-center transition-transform active:scale-95 cursor-pointer relative">
         <div class="w-10 h-10 bg-pink-50 rounded-xl flex items-center justify-center mb-3 text-pink-500 border border-pink-100">
@@ -286,8 +291,6 @@
         </div>
         <p class="text-[10px] font-extrabold text-blue-900 uppercase tracking-tighter leading-tight">Free Delivery > 1000 Rs.</p>
     </div>
-
-    <!-- 7 Days Return -->
     <div onclick="showServiceInfo(this, 'If you have any concern, size issue you can return back it to us')" 
          class="bg-white p-4 rounded-2xl border-2 border-pink-200 shadow-sm flex flex-col items-center text-center transition-transform active:scale-95 cursor-pointer relative">
         <div class="w-10 h-10 bg-pink-50 rounded-xl flex items-center justify-center mb-3 text-pink-500 border border-pink-100">
@@ -295,8 +298,6 @@
         </div>
         <p class="text-[10px] font-extrabold text-blue-900 uppercase tracking-tighter leading-tight">7 Days Return Option</p>
     </div>
-
-    <!-- Easy Refund -->
     <div onclick="showServiceInfo(this, 'Once your order get return or get cancelled refund will be provided to you within 2 days')" 
          class="bg-white p-4 rounded-2xl border-2 border-pink-200 shadow-sm flex flex-col items-center text-center transition-transform active:scale-95 cursor-pointer relative">
         <div class="w-10 h-10 bg-pink-50 rounded-xl flex items-center justify-center mb-3 text-pink-500 border border-pink-100">
@@ -306,7 +307,6 @@
     </div>
 </section>
 
-<!-- This is the hidden tooltip element -->
 <div id="service-tooltip" class="fixed hidden z-[500] bg-blue-900 text-white text-[11px] p-3 rounded-xl shadow-xl max-w-[200px] text-center leading-snug animate-fade-in">
     <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-blue-900 rotate-45"></div>
     <span id="tooltip-text"></span>
@@ -353,13 +353,17 @@
         </div>
     </div>
 
-
-
     <!-- Wishlist Page -->
     <div id="page-wishlist" class="page-transition hidden">
-        <h2 class="text-2xl font-bold mb-8 text-center text-gray-700 uppercase tracking-widest">My Wishlist</h2>
-        <div id="wishlist-container" class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto mb-8"></div>
-        <div id="wishlist-empty" class="hidden text-center py-20"><p class="text-gray-500">Your wishlist is empty.</p></div>
+        <div class="max-w-6xl mx-auto">
+            <!-- BACK BUTTON WISHLIST PAGE -->
+            <button onclick="navigateTo('catalog')" class="mb-4 flex items-center gap-2 text-pink-500 font-bold text-[10px] uppercase tracking-widest">
+                <i class="fa-solid fa-arrow-left text-xs"></i> Back to Catalog
+            </button>
+            <h2 class="text-2xl font-bold mb-8 text-center text-gray-700 uppercase tracking-widest">My Wishlist</h2>
+            <div id="wishlist-container" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"></div>
+            <div id="wishlist-empty" class="hidden text-center py-20"><p class="text-gray-500">Your wishlist is empty.</p></div>
+        </div>
     </div>
 
     <!-- Success Screen -->
@@ -377,7 +381,6 @@
 </main>
 
 <!-- FOOTER -->
-
     <footer class="bg-white border-t border-gray-100 mt-12">
         <div class="max-w-7xl mx-auto px-6 py-8">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
@@ -396,17 +399,21 @@
         </div>
     </footer>
 
-<!-- PRODUCT MODAL (WITH SHARE BUTTON & EXTRA IMAGES SLIDER) -->
-
+<!-- PRODUCT MODAL -->
 <div id="product-modal" class="fixed inset-0 z-[100] hidden bg-black/90 overflow-y-auto">
-    <h2 class="text-xl font-bold mt-4">${p.name}</h2>
     <div class="min-h-screen flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-4xl rounded-3xl overflow-hidden relative flex flex-col md:flex-row animate-bounce-in">
+            
+            <!-- BACK BUTTON ON EXTRA IMAGE MODAL (TOP LEFT) -->
+            <button onclick="closeProductModal()" class="absolute top-4 left-4 z-[110] bg-white/90 px-3 py-1.5 rounded-full shadow-lg flex items-center gap-2 text-pink-500 font-bold text-[10px] uppercase">
+                <i class="fa-solid fa-arrow-left"></i> Back
+            </button>
+
             <button onclick="closeProductModal()" class="absolute top-4 right-4 z-[110] bg-white/80 p-2 rounded-full"><i class="fa-solid fa-xmark text-xl text-pink-500"></i></button>
+            
             <div class="md:w-1/2 bg-gray-100 p-4 relative">
                 <div class="slider-container rounded-xl overflow-hidden relative">
                     <div id="modal-slider-wrapper" class="slider-wrapper"></div>
-                    <!-- Slider Arrows -->
                     <button onclick="moveSlider(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/50 p-2 rounded-full text-pink-500"><i class="fa-solid fa-chevron-left"></i></button>
                     <button onclick="moveSlider(1)" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/50 p-2 rounded-full text-pink-500"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
@@ -419,7 +426,6 @@
                 
                 <div class="flex gap-2 mt-8">
                     <button id="modal-add-btn-final" class="flex-[2] bg-pink-500 text-white py-4 rounded-2xl font-bold shadow-lg">Add to Bag</button>
-                    <!-- WhatsApp Share Button -->
                     <button id="modal-share-btn" class="flex-1 bg-green-50 text-green-600 py-4 rounded-2xl font-bold border border-green-200 flex items-center justify-center gap-2">
                         <i class="fa-brands fa-whatsapp text-lg"></i> Share
                     </button>
@@ -428,6 +434,20 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 
 <!-- FIXED CUSTOM POPUP -->
@@ -528,52 +548,58 @@ function renderCatalog(filtered = products) {
 
 
 
-    function openProductModal(productId) {
-        const product = products.find(p => p.id === productId);
-        currentSlideIndex = 0;
-        document.getElementById('modal-title').innerText = product.name;
-        document.getElementById('modal-price').innerText = "Rs. " + product.price;
-        document.getElementById('modal-desc').innerHTML = `
-            <p class="text-pink-500 font-bold mb-1 uppercase text-[11px] tracking-widest">${product.desc}</p>
+function openProductModal(productId) {
+    const product = products.find(p => p.id === productId);
+    currentSlideIndex = 0;
+    document.getElementById('modal-title').innerText = product.name;
+    document.getElementById('modal-price').innerText = "Rs. " + product.price;
+    
+    // Updated modal-desc to include logic for red/grayed out "Out of Stock" sizes
+    document.getElementById('modal-desc').innerHTML = `
+        <p class="text-pink-500 font-bold mb-1 uppercase text-[11px] tracking-widest">${product.desc}</p>
+        <p class="text-xs">${product.fullDesc}</p>
+        <label class="block text-[10px] font-bold mt-4 uppercase text-gray-400">Select Size:</label>
+        <select id="modal-size-select" class="w-full mt-4 p-2 border rounded-xl bg-gray-50 text-sm font-bold">
+            ${product.sizes.map(s => {
+                const isOut = s.toUpperCase().includes("OUT OF STOCK");
+                // Applies red color and disables the option if it is out of stock[cite: 1]
+                return `<option value="${s}" ${isOut ? 'disabled style="color: #ef4444;"' : ''}>${s}</option>`;
+            }).join('')}
+        </select>`;
+    
+    // Handle Extra Images Slider
+    const images = [product.img, ...(product.extraImages || [])];
+    totalSlides = images.length;
+    document.getElementById('modal-slider-wrapper').innerHTML = images.map(img => 
+        `<div class="slider-item">
+            <img src="${img}" 
+                 onclick="openFullscreen('${img}')" 
+                 class="w-full aspect-[3/4] object-cover cursor-zoom-in" 
+                 alt="Dress Image">
+        </div>`).join('');
+
+    document.getElementById('modal-thumbnails').innerHTML = images.map((img, i) => `<img src="${img}" onclick="goToSlide(${i})" class="w-14 h-18 object-cover rounded-lg cursor-pointer border-2 border-transparent">`).join('');
+    updateSliderPosition();
+
+    // Add Button Logic
+    document.getElementById('modal-add-btn-final').onclick = () => {
+        const sz = document.getElementById('modal-size-select').value;
+        addToCartWithSize(product.name, product.price, product.img, 'modal-size-select', true);
+        closeProductModal();
+    };
+
+    // WhatsApp Share Logic
+    document.getElementById('modal-share-btn').onclick = () => {
+        const msg = `Check out this beautiful design from \n *Siya Collection* -\n*${product.name}*\n${product.desc}\nPrice: Rs. ${product.price}\n\n📸 Product Image: ${product.img}\n\n✨ See more designs here: https://www.siyacollection2026.in/`;
+        window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+    };
+
+    document.getElementById('product-modal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
 
 
-            <p class="text-xs">${product.fullDesc}</p>
-            <label class="block text-[10px] font-bold mt-4 uppercase text-gray-400">Select Size:</label>
-            <select id="modal-size-select" class="w-full mt-4 p-2 border rounded-xl bg-gray-50 text-sm font-bold">
-                ${product.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
-            </select>`;
-        
-        // Handle Extra Images Slider
-        const images = [product.img, ...(product.extraImages || [])];
-        totalSlides = images.length;
-document.getElementById('modal-slider-wrapper').innerHTML = images.map(img => 
-    `<div class="slider-item">
-        <img src="${img}" 
-             onclick="openFullscreen('${img}')" 
-             class="w-full aspect-[3/4] object-cover cursor-zoom-in" 
-             alt="Dress Image">
-    </div>`).join('');
 
-
-        document.getElementById('modal-thumbnails').innerHTML = images.map((img, i) => `<img src="${img}" onclick="goToSlide(${i})" class="w-14 h-18 object-cover rounded-lg cursor-pointer border-2 border-transparent">`).join('');
-        updateSliderPosition();
-
-        // Add Button Logic
-        document.getElementById('modal-add-btn-final').onclick = () => {
-            const sz = document.getElementById('modal-size-select').value;
-            addToCartWithSize(product.name, product.price, product.img, 'modal-size-select', true);
-            closeProductModal();
-        };
-
-        // WhatsApp Share Logic
-        document.getElementById('modal-share-btn').onclick = () => {
-            const msg = `Check out this beautiful design from \n *Siya Collection* -\n*${product.name}*\n${product.desc}\nPrice: Rs. ${product.price}\n\n📸 Product Image: ${product.img}\n\n✨ See more designs here: https://www.siyacollection2026.in/`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
-        };
-
-        document.getElementById('product-modal').classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    }
 
     function updateSliderPosition() {
         document.getElementById('modal-slider-wrapper').style.transform = `translateX(-${currentSlideIndex * 100}%)`;
@@ -946,13 +972,38 @@ window.onpopstate = function(event) {
 <script>
     (function() {
         // Add a fake entry to the history stack
-        history.pushState(null, document.title, location.href);
+// Logic to link Mobile Hardware Back Button to the Catalog Page
+(function() {
+    // 1. Push a dummy state into history so there is something to "go back" from
+    function pushInitialState() {
+        window.history.pushState({ page: 'catalog_redirect' }, '');
+    }
 
-        window.addEventListener('popstate', function (event) {
-            // When the user hits 'Back', send them to the catalog
-            window.location.replace("catalog.html");
-        });
-    })();
+    // Initialize the dummy state on load
+    pushInitialState();
+
+    // 2. Listen for the mobile/browser back button click
+    window.addEventListener('popstate', function (event) {
+        // Check if the user is currently NOT on the catalog page
+        // You can use your existing variable that tracks the current page
+        // or check the visibility of the catalog div
+        const catalogPage = document.getElementById('page-catalog');
+        
+        if (catalogPage && catalogPage.classList.contains('hidden')) {
+            // If the catalog is hidden, the user is on Home, About, Cart, etc.
+            // Prevent the default back action and force them to the catalog
+            navigateTo('catalog');
+            
+            // Re-push the state so the back button works again if they are still not on catalog
+            pushInitialState();
+        } else {
+            // If they are already on the catalog, let the back button behave normally 
+            // (e.g., exiting the site or going to the previous site)
+        }
+    });
+})();
+
+
 </script>
 
 <!-- THE ZOOM LAYER: Must be at the very end of your body -->
