@@ -140,7 +140,7 @@
         <section class="mb-8"> 
             <!-- BACK BUTTON HOME PAGE -->
             <button onclick="navigateTo('catalog')" class="mb-4 flex items-center gap-2 text-pink-500 font-bold text-[10px] uppercase tracking-widest">
-                <i class="fa-solid fa-arrow-left text-xs"></i> Back to Catalog
+                <i class="fa-solid fa-arrow-left text-md"></i> Go to Catalog
             </button>
             <h2 class="text-xl font-bold mb-6 border-l-4 border-pink-500 pl-3">
                 <span class="text-blue-800 uppercase text-sm tracking-widest block mb-1">Latest Branded Collection</span>
@@ -185,72 +185,123 @@
 
     <!-- Payment/Cart Page -->
     <div id="page-payment" class="page-transition hidden">
-        <div class="max-w-2xl mx-auto bg-white p-6 rounded-3xl shadow-lg border">
+  <!--          <div class="bg-white rounded-2xl mx-auto bg-white p-6 rounded-3xl shadow-lg border"> -->
+<!--        <div class="bg-white rounded-2xl p-3 shadow-sm border border-pink-100 flex items-center justify-between gap-4"> -->
+     <div class="bg-white rounded-2xl p-6 shadow-sm border border-pink-100  justify-between gap-4"> 
             <!-- BACK BUTTON CART PAGE -->
             <button onclick="navigateTo('catalog')" class="mb-4 flex items-center gap-2 text-pink-500 font-bold text-[10px] uppercase tracking-widest">
-                <i class="fa-solid fa-arrow-left text-xs"></i> Back to Catalog
+                <i class="fa-solid fa-arrow-left text-xs"></i> Go to Catalog
             </button>
-            <div class="mb-8 bg-pink-50 p-4 rounded-2xl border border-pink-100">
-                <h3 class="text-center text-[12px] font-bold text-pink-500 uppercase tracking-widest mb-4">5 Easy Steps to Shop</h3>
-                <div class="grid grid-cols-5 gap-1 text-[7px] md:text-[9px] text-center font-bold uppercase">
-                    <div class="flex flex-col items-center gap-1 text-pink-600"><span class="w-5 h-5 rounded-full bg-pink-500 text-white flex items-center justify-center">1</span>Cart</div>
-                    <div class="flex flex-col items-center gap-1 text-pink-600"><span class="w-5 h-5 rounded-full bg-pink-500 text-white flex items-center justify-center">2</span>Address</div>
-                    <div class="flex flex-col items-center gap-1 text-pink-600"><span class="w-5 h-5 rounded-full bg-pink-500 text-white flex items-center justify-center">3</span>Discount</div>
-                    <div class="flex flex-col items-center gap-1 text-pink-600"><span class="w-5 h-5 rounded-full bg-pink-500 text-white flex items-center justify-center">4</span>Pay</div>
-                    <div class="flex flex-col items-center gap-1 text-pink-600"><span class="w-5 h-5 rounded-full bg-pink-500 text-white flex items-center justify-center">5</span>Confirm</div>
-                </div>
-            </div>
+	<div class="mb-6 bg-pink-50 p-2 rounded-xl border border-pink-100">
+    <!-- Reduced text size from 12px to 9px and bottom margin from mb-4 to mb-2 -->
+    <h3 class="text-center text-[12px] font-bold text-pink-500 uppercase tracking-widest mb-4">5 Easy Steps to Shop</h3>
+    
+    <div class="grid grid-cols-5 gap-0 text-[7px] text-center font-bold uppercase">
+        <!-- Reduced circle size from w-5 to w-4 and text gap -->
+        <div class="flex flex-col items-center gap-0.5 text-pink-600">
+            <span class="w-4 h-4 rounded-full bg-pink-500 text-white flex items-center justify-center text-[8px]">1</span>
+            Cart
+        </div>
+        <div class="flex flex-col items-center gap-0.5 text-pink-600">
+            <span class="w-4 h-4 rounded-full bg-pink-500 text-white flex items-center justify-center text-[8px]">2</span>
+            Address
+        </div>
+        <div class="flex flex-col items-center gap-0.5 text-pink-600">
+            <span class="w-4 h-4 rounded-full bg-pink-500 text-white flex items-center justify-center text-[8px]">3</span>
+            Discount
+        </div>
+        <div class="flex flex-col items-center gap-0.5 text-pink-600">
+            <span class="w-4 h-4 rounded-full bg-pink-500 text-white flex items-center justify-center text-[8px]">4</span>
+            Pay
+        </div>
+        <div class="flex flex-col items-center gap-0.5 text-pink-600">
+            <span class="w-4 h-4 rounded-full bg-pink-500 text-white flex items-center justify-center text-[8px]">5</span>
+            Confirm
+        </div>
+    </div>
+</div>
             <h2 class="text-md font-bold mb-3 text-gray-800 flex items-center gap-2"><i class="fa-solid fa-basket-shopping text-pink-500"></i> 1. Check your cart</h2>
             <div id="cart-items" class="space-y-3 mb-6"></div>
             
-            <h2 class="text-md font-bold mb-3 text-gray-800 flex items-center gap-2"><i class="fa-solid fa-map-location-dot text-pink-500"></i> 2. Name and Address</h2>
-            <div class="grid grid-cols-1 gap-2 mb-6">
-                <input type="text" id="cust-name" placeholder="Full Name" class="w-full p-2 rounded-lg border border-gray-200 text-xs"> 
-                <input type="tel" id="cust-phone" maxlength="10" placeholder="10-Digit Mobile Number" class="w-full p-2 rounded-lg border border-gray-200 text-xs">
-                <textarea id="cust-address" placeholder="Full Address with Landmark." class="w-full p-2 rounded-lg border border-gray-200 text-xs"></textarea>
-            </div>
+<h2 class="text-md font-bold mb-3 text-gray-800 flex items-center gap-2">
+    <i class="fa-solid fa-map-location-dot text-pink-500"></i> 2. Name and Address
+</h2>
+<div class="grid grid-cols-1 gap-1.5 mb-4">
+    <!-- Reduced padding from p-2 to p-1.5 and text-xs for a sleeker look -->
+    <input type="text" id="cust-name" placeholder="Full Name" 
+           class="w-full p-1.5 rounded-md border border-gray-200 text-[10px] outline-none focus:border-pink-300"> 
+    
+    <input type="tel" id="cust-phone" maxlength="10" placeholder="10-Digit Mobile Number" 
+           class="w-full p-1.5 rounded-md border border-gray-200 text-[10px] outline-none focus:border-pink-300">
+    
+    <!-- Reduced height for the address box -->
+   <textarea id="cust-address" placeholder="Full Address with Landmark." rows="2" class="w-full p-1.5 rounded-md border border-gray-200 text-[10px] outline-none focus:border-pink-300"></textarea>
+</div>
 
-            <h2 class="text-md font-bold mb-3 text-gray-800 flex items-center gap-2"><i class="fa-solid fa-ticket text-pink-500"></i> 3. Add Promo Code</h2>
-            <div class="flex gap-2 mb-6">
-                <input type="text" id="promo-input" placeholder="SIYAXXXXXX" class="flex-1 p-2 rounded-lg border border-gray-200 text-xs uppercase">
-                <button onclick="applyPromo()" class="bg-gray-800 text-white px-4 rounded-lg font-bold text-[10px]">Apply</button>
-            </div>
+<!-- Compact Promo Code Section -->
+<h2 class="text-md font-bold mb-23 text-gray-800 flex items-center gap-2">
+    <i class="fa-solid fa-ticket text-pink-500"></i> 3. Add Promo Code
+</h2>
+<div class="flex gap-1.5 mb-4">
+    <input type="text" id="promo-input" placeholder="SIYAXXXXXX" 
+           class="flex-1 p-1.5 rounded-md border border-gray-200 text-[10px] uppercase outline-none focus:border-pink-300">
+    <button onclick="applyPromo()" 
+            class="bg-gray-800 text-white px-3 rounded-md font-bold text-[9px] uppercase">Apply</button>
+</div>
 
-            <div class="bg-gray-50 p-3 rounded-2xl mb-6 space-y-1 border border-dashed border-gray-200">
-                <div class="flex justify-between text-xs"><span class="text-gray-500">Subtotal:</span><span id="subtotal-val">Rs. 0</span></div>
-                <div id="promo-row" class="flex justify-between text-xs text-green-600 hidden font-bold"><span>Discount:</span><span id="discount-val">- Rs. 0</span></div>
-                <div class="flex justify-between text-lg font-bold border-t pt-2 mt-2"><span>Total Payable:</span><span class="text-pink-600" id="cart-total">Rs. 0</span></div>
-            </div>
+<!-- Compact Billing Details -->
+<div class="bg-gray-50 p-2.5 rounded-xl mb-4 space-y-1 border border-dashed border-gray-200">
+    <div class="flex justify-between text-[10px]">
+        <span class="text-gray-500">Subtotal:</span>
+        <span id="subtotal-val" class="font-medium">Rs. 0</span>
+    </div>
+    <div id="promo-row" class="flex justify-between text-[10px] text-green-600 hidden font-bold">
+        <span>Discount:</span>
+        <span id="discount-val">- Rs. 0</span>
+    </div>
+    <div class="flex justify-between text-sm font-bold border-t border-gray-200 pt-1.5 mt-1.5">
+        <span>Total Payable:</span>
+        <span class="text-pink-600" id="cart-total">Rs. 0</span>
+    </div>
+</div>
 
+
+<!-- Compact UPI Payment Section -->
 <h2 class="text-md font-bold mb-3 text-gray-800 flex items-center gap-2">
     <i class="fa-solid fa-qrcode text-pink-500"></i> 4. Pay via UPI Scanner
 </h2>
 
-<div class="bg-pink-50 p-6 rounded-3xl text-center mb-6 border border-pink-100 shadow-sm">
-    <div class="relative inline-block p-4 bg-white rounded-2xl shadow-md mb-4">
+<div class="bg-pink-50 p-3 rounded-2xl text-center mb-4 border border-pink-100 shadow-sm">
+    <!-- Reduced container padding and shadow for a slimmer look -->
+    <div class="relative inline-block p-2 bg-white rounded-xl shadow-sm mb-2">
+        <!-- Reduced image size from w-32 to w-24 -->
         <img src="https://i.ibb.co/VWh3PbD7/Gpay-Siya-Collection.jpg" 
-             class="w-32 h-32 mx-auto rounded-lg">
+             class="w-24 h-24 mx-auto rounded-md">
     </div>
-    <p class="text-[10px] font-bold text-blue-900 uppercase tracking-tight">Scan to pay via any UPI App</p>
-    <div class="flex justify-center gap-4 mt-2 opacity-60">
-        <i class="fa-brands fa-google-pay text-lg"></i>
-        <i class="fa-solid fa-building-columns text-sm"></i>
-        <i class="fa-solid fa-mobile-screen-button text-sm"></i>
+    
+    <p class="text-[9px] font-bold text-blue-900 uppercase tracking-tight">Scan to pay via any UPI App</p>
+    
+    <!-- Tightened icon spacing and size -->
+    <div class="flex justify-center gap-3 mt-1.5 opacity-60">
+        <i class="fa-brands fa-google-pay text-base"></i>
+        <i class="fa-solid fa-building-columns text-[10px]"></i>
+        <i class="fa-solid fa-mobile-screen-button text-[10px]"></i>
     </div>
 </div>
             <h2 class="text-md font-bold mb-3 text-gray-800 flex items-center gap-2"><i class="fa-brands fa-whatsapp text-green-500"></i> 5. Confirm Order</h2>
             <button onclick="sendWhatsAppOrder()" class="w-full bg-green-500 text-white py-3 rounded-xl font-bold shadow-lg flex items-center justify-center gap-3 text-sm">
-                Click to Send Order & <br> Payment Proof
+                Click to place Order <br> 
             </button>
         </div>
     </div>
 
     <!-- About Page -->
 	<div id="page-about" class="page-transition hidden">
+
     	<div class="max-w-6xl mx-auto py-12 bg-gray-100 rounded-3xl shadow-sm px-6 border border-gray-200">
         <!-- BACK BUTTON ABOUT PAGE -->
         <button onclick="navigateTo('catalog')" class="mb-4 flex items-center gap-2 text-pink-500 font-bold text-[10px] uppercase tracking-widest">
-            <i class="fa-solid fa-arrow-left text-xs"></i> Back to Catalog
+            <i class="fa-solid fa-arrow-left text-xs"></i> Go to Catalog
         </button>
 		<h3 class="text-center text-xs uppercase text-yellow-700 font-bold tracking-widest mb-10">Our Leadership Team</h3>
             	<div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center mb-16 p-6 bg-white/50 backdrop-blur-sm rounded-3xl border border-gray-100 shadow-sm">	
@@ -276,37 +327,50 @@
                 </div>
             </div>
 
+
 <section class="grid grid-cols-2 gap-3 my-6">
-    <div onclick="showServiceInfo(this, 'Book your order on any day from Monday to Friday and on same weekend order will be delivered within 10 km')" 
+    <!-- Weekend Home Delivery -->
+    <div onclick="showServiceInfo(this, 'Book your order on any week day between Monday to Friday and on same weekend order will be delivered within 10 km from shop')" 
          class="bg-white p-4 rounded-2xl border-2 border-pink-200 shadow-sm flex flex-col items-center text-center transition-transform active:scale-95 cursor-pointer relative">
         <div class="w-10 h-10 bg-pink-50 rounded-xl flex items-center justify-center mb-3 text-pink-500 border border-pink-100">
             <i class="fa-solid fa-truck-fast text-lg"></i>
         </div>
         <p class="text-[10px] font-extrabold text-blue-900 uppercase tracking-tighter leading-tight">Weekend Home Delivery</p>
+        <p class="text-[8px] text-gray-400 mt-1 font-medium">Click here for more info</p>
     </div>
+
+    <!-- Free Delivery -->
     <div onclick="showServiceInfo(this, 'Order on above Rs. 1000 and your order will be delivered free')" 
          class="bg-white p-4 rounded-2xl border-2 border-pink-200 shadow-sm flex flex-col items-center text-center transition-transform active:scale-95 cursor-pointer relative">
         <div class="w-10 h-10 bg-pink-50 rounded-xl flex items-center justify-center mb-3 text-pink-500 border border-pink-100">
             <i class="fa-solid fa-boxes-packing text-lg"></i>
         </div>
         <p class="text-[10px] font-extrabold text-blue-900 uppercase tracking-tighter leading-tight">Free Delivery > 1000 Rs.</p>
+        <p class="text-[8px] text-gray-400 mt-1 font-medium">Click here for more info</p>
     </div>
-    <div onclick="showServiceInfo(this, 'If you have any concern, size issue you can return back it to us')" 
+
+    <!-- 7 Days Return -->
+    <div onclick="showServiceInfo(this, 'If you have any concern, size, quality issue then you can return back it to us')" 
          class="bg-white p-4 rounded-2xl border-2 border-pink-200 shadow-sm flex flex-col items-center text-center transition-transform active:scale-95 cursor-pointer relative">
         <div class="w-10 h-10 bg-pink-50 rounded-xl flex items-center justify-center mb-3 text-pink-500 border border-pink-100">
             <i class="fa-solid fa-arrow-rotate-left text-lg"></i>
         </div>
         <p class="text-[10px] font-extrabold text-blue-900 uppercase tracking-tighter leading-tight">7 Days Return Option</p>
+        <p class="text-[8px] text-gray-400 mt-1 font-medium">Click here for more info</p>
     </div>
+
+    <!-- Easy Refund -->
     <div onclick="showServiceInfo(this, 'Once your order get return or get cancelled refund will be provided to you within 2 days')" 
          class="bg-white p-4 rounded-2xl border-2 border-pink-200 shadow-sm flex flex-col items-center text-center transition-transform active:scale-95 cursor-pointer relative">
         <div class="w-10 h-10 bg-pink-50 rounded-xl flex items-center justify-center mb-3 text-pink-500 border border-pink-100">
             <i class="fa-solid fa-hand-holding-dollar text-lg"></i>
         </div>
         <p class="text-[10px] font-extrabold text-blue-900 uppercase tracking-tighter leading-tight">Easy Refund in 2 days</p>
+        <p class="text-[8px] text-gray-400 mt-1 font-medium">Click here for more info</p>
     </div>
 </section>
 
+<!-- Tooltip Element -->
 <div id="service-tooltip" class="fixed hidden z-[500] bg-blue-900 text-white text-[11px] p-3 rounded-xl shadow-xl max-w-[200px] text-center leading-snug animate-fade-in">
     <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-blue-900 rotate-45"></div>
     <span id="tooltip-text"></span>
@@ -358,7 +422,7 @@
         <div class="max-w-6xl mx-auto">
             <!-- BACK BUTTON WISHLIST PAGE -->
             <button onclick="navigateTo('catalog')" class="mb-4 flex items-center gap-2 text-pink-500 font-bold text-[10px] uppercase tracking-widest">
-                <i class="fa-solid fa-arrow-left text-xs"></i> Back to Catalog
+                <i class="fa-solid fa-arrow-left text-xs"></i> Go to Catalog
             </button>
             <h2 class="text-2xl font-bold mb-8 text-center text-gray-700 uppercase tracking-widest">My Wishlist</h2>
             <div id="wishlist-container" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"></div>
@@ -373,7 +437,7 @@
             <h2 class="brand-name text-2xl font-bold text-gray-800 mb-2 uppercase">Order Ready!</h2>
             <p class="text-gray-500 text-sm mb-8">Click the button below to send details to WhatsApp.</p>
             <button id="final-whatsapp-btn" class="w-full bg-green-500 text-white py-4 rounded-xl font-bold shadow-lg flex items-center justify-center gap-2">
-                <i class="fa-brands fa-whatsapp text-xl"></i> Go to WhatsApp to send order
+                <i class="fa-brands fa-whatsapp text-xl"></i> Go to WhatsApp and <br>send order details
             </button>
             <button onclick="location.reload()" class="mt-4 text-gray-400 text-xs">Cancel & Back to Home</button>
         </div>
@@ -436,19 +500,6 @@
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-	
 
 <!-- FIXED CUSTOM POPUP -->
 <div id="custom-popup" class="fixed inset-0 items-center justify-center z-[250] hidden bg-black/40 px-4">
@@ -547,7 +598,6 @@ function renderCatalog(filtered = products) {
 }
 
 
-
 function openProductModal(productId) {
     const product = products.find(p => p.id === productId);
     currentSlideIndex = 0;
@@ -597,6 +647,7 @@ function openProductModal(productId) {
     document.getElementById('product-modal').classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 }
+
 
 
 
