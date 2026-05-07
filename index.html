@@ -696,23 +696,27 @@ function closeProductModal() {
 
 
 function navigateTo(pageId) {
-    toggleMenu(false);
-    ['home', 'catalog', 'payment', 'about', 'wishlist'].forEach(p => {
-        const el = document.getElementById(`page-${p}`);
+    // 1. List of all your section IDs (Matches your HTML exactly)
+    const pages = ['page-home', 'page-catalog', 'page-about', 'page-wishlist', 'page-payment'];
+    
+    // 2. Hide everything first
+    pages.forEach(id => {
+        const el = document.getElementById(id);
         if (el) el.classList.add('hidden');
     });
-    
-    const targetPage = document.getElementById(`page-${pageId}`);
-    if (targetPage) targetPage.classList.remove('hidden');
 
-    // Add a history entry so the back button works
-   history.pushState({ page: pageId }, "", `#${pageId}`);  
-
-   
-    if(pageId === 'catalog') renderCatalog();
-    if(pageId === 'payment') renderCart();
-    if(pageId === 'wishlist') renderWishlist();
-    window.scrollTo(0,0);
+    // 3. Show only the one the user clicked
+    const targetPage = document.getElementById('page-' + pageId);
+    if (targetPage) {
+        targetPage.classList.remove('hidden');
+        window.scrollTo(0, 0); // Always scroll to top on new page
+        
+        // 4. Update the URL and Browser History
+        // This makes the mobile back button "aware" of the page change
+        if (window.location.hash !== '#' + pageId) {
+            history.pushState({ page: pageId }, '', '#' + pageId);
+        }
+    }
 }
 
     function renderCart() {
@@ -1009,39 +1013,25 @@ window.onpopstate = function(event) {
 </script>
 
 <script>
-    (function() {
-        // Add a fake entry to the history stack
-// Logic to link Mobile Hardware Back Button to the Catalog Page
-(function() {
-    // 1. Push a dummy state into history so there is something to "go back" from
-    function pushInitialState() {
-        window.history.pushState({ page: 'catalog_redirect' }, '');
+
+// Reliable Mobile Back Button Logic
+window.addEventListener('popstate', function (event) {
+    const currentHash = window.location.hash;
+
+    // If the user hits back and is NOT on the catalog, force them to the catalog
+    if (currentHash !== '#catalog' && currentHash !== '') {
+        navigateTo('catalog');
+    } 
+    // If they are on #catalog, hitting back will now correctly exit the app 
+    // instead of showing a "site not working" error.
+});
+
+// Ensure the page starts with a clean history state on first load
+window.addEventListener('load', function() {
+    if (!window.location.hash || window.location.hash === '#home') {
+        history.replaceState({ page: 'home' }, '', '#home');
     }
-
-    // Initialize the dummy state on load
-    pushInitialState();
-
-    // 2. Listen for the mobile/browser back button click
-    window.addEventListener('popstate', function (event) {
-        // Check if the user is currently NOT on the catalog page
-        // You can use your existing variable that tracks the current page
-        // or check the visibility of the catalog div
-        const catalogPage = document.getElementById('page-catalog');
-        
-        if (catalogPage && catalogPage.classList.contains('hidden')) {
-            // If the catalog is hidden, the user is on Home, About, Cart, etc.
-            // Prevent the default back action and force them to the catalog
-            navigateTo('catalog');
-            
-            // Re-push the state so the back button works again if they are still not on catalog
-            pushInitialState();
-        } else {
-            // If they are already on the catalog, let the back button behave normally 
-            // (e.g., exiting the site or going to the previous site)
-        }
-    });
-})();
-
+});
 
 </script>
 
@@ -1058,6 +1048,7 @@ window.onpopstate = function(event) {
     
     <p class="mt-8 text-white/50 text-[10px] uppercase tracking-[0.3em]">Tap anywhere to close</p>
 </div>
+
 
 
 
