@@ -706,8 +706,9 @@ function navigateTo(pageId) {
     if (targetPage) targetPage.classList.remove('hidden');
 
     // Add a history entry so the back button works
-    history.pushState({ page: pageId }, "", `#${pageId}`);
-    
+   history.pushState({ page: pageId }, "", `#${pageId}`);  
+
+   
     if(pageId === 'catalog') renderCatalog();
     if(pageId === 'payment') renderCart();
     if(pageId === 'wishlist') renderWishlist();
@@ -882,18 +883,16 @@ function renderWishlist() {
 
 
 function applyFilters() {
-    // 1. Get all current filter values
+    // 1. Get current filter values (Removed sort-order reference)
     const searchTerm = document.getElementById('catalogSearch').value.toLowerCase();
     const type = document.getElementById('filter-type').value;
     const priceRange = document.getElementById('filter-price').value;
-    const sortOrder = document.getElementById('sort-order').value;
 
     // 2. Run the filtering logic
     let filtered = products.filter(p => {
         const matchesSearch = p.name.toLowerCase().includes(searchTerm) || 
                               p.desc.toLowerCase().includes(searchTerm);
         
-        // This matches the 'category' you added in Step 1
         const matchesType = (type === 'all') || (p.category === type);
         
         let matchesPrice = true;
@@ -905,18 +904,7 @@ function applyFilters() {
         return matchesSearch && matchesType && matchesPrice;
     });
 
-    // 3. Run the sorting logic
-    if (sortOrder === 'price-low') {
-        filtered.sort((a, b) => a.price - b.price);
-    } else if (sortOrder === 'price-high') {
-        filtered.sort((a, b) => b.price - a.price);
-    } else if (sortOrder === 'name-az') {
-        filtered.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (sortOrder === 'name-za') {
-        filtered.sort((a, b) => b.name.localeCompare(a.name));
-    }
-
-    // 4. Update the screen
+    // 3. Update the screen
     renderCatalog(filtered);
 }
 
