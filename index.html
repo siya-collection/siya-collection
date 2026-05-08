@@ -52,14 +52,9 @@
     animation: fadeIn 0.3s ease-out;
 }
 
-    </style>
+</style>
+
 </head>
-
-
-
-
-
-
 
 
 
@@ -121,7 +116,7 @@
 
 <main id="mainContent" class="max-w-7xl mx-auto p-4 md:p-8">
     <!-- Home Page -->
-    <div id="page-home" class="page-transition hidden">
+    <div id="page-home" class="page-transition">
         <section class="mb-6">
             <div class="bg-white rounded-2xl p-3 shadow-sm border border-pink-100 flex items-center justify-between gap-4">
                 <div class="flex items-center gap-3">
@@ -138,10 +133,35 @@
             </div>
         </section>        
         <section class="mb-8"> 
-            <!-- BACK BUTTON HOME PAGE -->
-            <button onclick="navigateTo('catalog')" class="mb-4 flex items-center gap-2 text-pink-500 font-bold text-[10px] uppercase tracking-widest">
-                <i class="fa-solid fa-arrow-left text-md"></i> Go to Catalog
-            </button>
+            <!-- BUTTON TO GO FOR SHOPPING CATALOG PAGE -->
+<button onclick="navigateTo('catalog')" 
+    class="mb-6 w-full py-4 bg-gradient-to-r from-pink-500 to-rose-400 text-white rounded-2xl shadow-lg shadow-pink-200 flex flex-col items-center justify-center gap-1 font-bold active:scale-95 transition-transform duration-200 animate-pulse-subtle">
+    
+    <div class="flex items-center gap-3">
+        <i class="fa-solid fa-bag-shopping text-lg"></i>
+        <span class="text-xs uppercase tracking-widest">Start Shopping Now</span>
+        <i class="fa-solid fa-chevron-right text-[10px]"></i>
+    </div>
+    
+    <span class="text-[10px] font-normal text-pink-100/80 lowercase">
+        click here
+    </span>
+</button>
+
+<style>
+@keyframes pulse-subtle {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+.animate-pulse-subtle {
+    animation: pulse-subtle 3s infinite ease-in-out;
+}
+</style>
+
+
+
+
+
             <h2 class="text-xl font-bold mb-6 border-l-4 border-pink-500 pl-3">
                 <span class="text-blue-800 uppercase text-sm tracking-widest block mb-1">Latest Branded Collection</span>
                 <span class="text-blue-500 text-sm font-semibold">Contact: +91 9834524074</span>
@@ -155,24 +175,39 @@
     </div>
 
 <!-- Catalog Page -->
-    <div id="page-catalog" class="page-transition"> 
+    <div id="page-catalog" class="page-transition hidden"> 
         <h2 class="text-2xl font-bold mb-4 text-center text-gray-700 uppercase tracking-widest">Our Catalog</h2>
         
 <div class="grid grid-cols-2 gap-2 p-3 bg-white sticky top-0 z-20 border-b mb-4 max-w-6xl mx-auto rounded-xl shadow-sm">
-    <select id="filter-type" onchange="applyFilters()" 
-        class="w-full bg-gray-50 p-2 border border-gray-200 rounded-lg text-[9px] font-bold uppercase text-gray-600 appearance-none focus:border-pink-300 outline-none">
-        <option value="all">Types-ALL</option>
-        <option value="Saree">Saree</option>
-        <option value="Western">Western</option>
-        <option value="Indian">Indian</option>
-    </select>
-    <select id="filter-price" onchange="applyFilters()" 
-        class="w-full bg-gray-50 p-2 border border-gray-200 rounded-lg text-[9px] font-bold uppercase text-gray-600 appearance-none focus:border-pink-300 outline-none">
-        <option value="all">Prices-ALL</option>
-        <option value="0-500">Under 500</option>
-        <option value="501-1000">501-1000</option>
-        <option value="1001-9999">Over 1000</option>
-    </select>
+    
+    <div class="relative">
+        <label class="block text-[8px] font-bold text-gray-400 uppercase ml-1 mb-1">
+            <i class="fa-solid fa-filter mr-1"></i> Category
+        </label>
+        <select id="filter-type" onchange="applyFilters()" 
+            class="w-full bg-gray-50 p-2 border border-gray-200 rounded-lg text-[9px] font-bold uppercase text-gray-600 appearance-none focus:border-pink-300 outline-none">
+            <option value="all">ALL TYPES</option>
+            <option value="Saree">Saree</option>
+            <option value="Western">Western</option>
+            <option value="Indian">Indian</option>
+        </select>
+    </div>
+
+    <div class="relative">
+        <label class="block text-[8px] font-bold text-gray-400 uppercase ml-1 mb-1">
+            <i class="fa-solid fa-ruler-horizontal mr-1"></i> Size
+        </label>
+        <select id="filter-size" onchange="applyFilters()" 
+            class="w-full bg-gray-50 p-2 border border-gray-200 rounded-lg text-[9px] font-bold uppercase text-gray-600 appearance-none focus:border-pink-300 outline-none">
+            <option value="all">All Sizes</option>
+            <option value="S">Size S</option>
+            <option value="M">Size M</option>
+            <option value="L">Size L</option>
+            <option value="XL">Size XL</option>
+            <option value="XXL">Size XXL</option>
+        </select>
+    </div>
+    
 </div>
         <div class="max-w-md mx-auto mb-8 px-4">
             <div class="relative">
@@ -500,7 +535,6 @@
 </div>
 
 
-
 <!-- FIXED CUSTOM POPUP -->
 <div id="custom-popup" class="fixed inset-0 items-center justify-center z-[250] hidden bg-black/40 px-4">
     <div class="bg-white rounded-3xl p-6 max-w-sm w-full text-center shadow-2xl">
@@ -510,6 +544,20 @@
         <button onclick="closePopup()" class="mt-2 text-gray-400 text-xs py-2 block w-full text-center">Continue Shopping</button>
     </div>
 </div>
+
+<div id="image-overlay" 
+     class="fixed inset-0 bg-black/95 z-[9999] hidden flex flex-col items-center justify-center p-4 cursor-pointer" 
+     onclick="closeFullscreen()">
+    
+    <!-- Close Button -->
+    <div class="absolute top-10 right-10 text-white text-5xl font-light">&times;</div>
+    
+    <!-- The Image Container -->
+    <img id="fullscreen-img" src="" class="max-w-full max-h-[85vh] object-contain shadow-2xl transition-transform duration-300">
+    
+    <p class="mt-8 text-white/50 text-[10px] uppercase tracking-[0.3em]">Tap anywhere to close</p>
+</div>
+
 
 <script>
     let cart = [];
@@ -555,10 +603,8 @@
 function renderCatalog(filtered = products) {
     const container = document.getElementById('catalog-container');
     const wishlist = JSON.parse(localStorage.getItem('siya_wishlist') || '[]');
-    
     container.innerHTML = filtered.map(p => {
         const isLiked = wishlist.includes(p.id);
-        
         return `
             <div class="bg-white rounded-xl border border-gray-100 p-2 relative shadow-sm">
                 <!-- Wishlist Heart Button -->
@@ -603,7 +649,6 @@ function openProductModal(productId) {
     currentSlideIndex = 0;
     document.getElementById('modal-title').innerText = product.name;
     document.getElementById('modal-price').innerText = "Rs. " + product.price;
-    
     // Updated modal-desc to include logic for red/grayed out "Out of Stock" sizes
     document.getElementById('modal-desc').innerHTML = `
         <p class="text-pink-500 font-bold mb-1 uppercase text-[11px] tracking-widest">${product.desc}</p>
@@ -649,17 +694,17 @@ function openProductModal(productId) {
 }
 
 
-
-
-
-    function updateSliderPosition() {
+function updateSliderPosition() 
+{
         document.getElementById('modal-slider-wrapper').style.transform = `translateX(-${currentSlideIndex * 100}%)`;
-    }
+}
 
-    function moveSlider(dir) { currentSlideIndex = (currentSlideIndex + dir + totalSlides) % totalSlides; updateSliderPosition(); }
-    function goToSlide(idx) { currentSlideIndex = idx; updateSliderPosition(); }
+function moveSlider(dir) { currentSlideIndex = (currentSlideIndex + dir + totalSlides) % totalSlides; updateSliderPosition(); }
 
-    function addToCartWithSize(name, price, img, selectId, isModal = false) {
+function goToSlide(idx) { currentSlideIndex = idx; updateSliderPosition(); }
+
+function addToCartWithSize(name, price, img, selectId, isModal = false) 
+{
         const sz = document.getElementById(selectId).value;
         cart.push({ id: Date.now(), name, price, img, size: sz });
         document.getElementById('cart-count').innerText = cart.length;
@@ -667,35 +712,40 @@ function openProductModal(productId) {
         document.getElementById('popup-message').innerText = `${name} (${sz}) added!`;
         popup.classList.remove('hidden');
         popup.classList.add('flex');
-    }
-    function updateCartCount() { document.getElementById('cart-count').innerText = cart.length; }
+}
 
-    function showPopup(msg) {
+function updateCartCount() { document.getElementById('cart-count').innerText = cart.length; }
+
+function showPopup(msg) 
+{
         const popup = document.getElementById('custom-popup');
         document.getElementById('popup-message').innerText = msg;
         popup.classList.remove('hidden');
         popup.classList.add('flex');
-    }
+}
 
-    function closePopup() {
+function closePopup() 
+{
         const popup = document.getElementById('custom-popup');
         popup.classList.add('hidden');
         popup.classList.remove('flex');
-    }
+}
 
-function closeProductModal() {
+function closeProductModal() 
+{
     document.getElementById('product-modal').classList.add('hidden');
     document.body.style.overflow = 'auto';
     document.documentElement.style.overflow = 'auto';
     
-    // Clean up the URL hash without triggering a reload
-    if (window.location.hash === "#product") {
+    if (window.location.hash === "#product") 
+	{
         history.replaceState({ page: 'catalog' }, "", "#catalog");
-    }
+	}
 }
 
 
-function navigateTo(pageId) {
+function navigateTo(pageId) 
+{
     toggleMenu(false);
     ['home', 'catalog', 'payment', 'about', 'wishlist'].forEach(p => {
         const el = document.getElementById(`page-${p}`);
@@ -706,7 +756,7 @@ function navigateTo(pageId) {
     if (targetPage) targetPage.classList.remove('hidden');
 
     // Add a history entry so the back button works
-   history.pushState({ page: pageId }, "", `#${pageId}`);  
+    history.pushState({ page: pageId }, "", `#${pageId}`);  
 
    
     if(pageId === 'catalog') renderCatalog();
@@ -715,16 +765,19 @@ function navigateTo(pageId) {
     window.scrollTo(0,0);
 }
 
-    function renderCart() {
+function renderCart() 
+{
         const container = document.getElementById('cart-items');
-        if (cart.length === 0) {
+        if (cart.length === 0) 
+	{
             container.innerHTML = '<p class="text-center py-10 text-gray-400 text-xs">Your bag is empty.</p>';
             document.getElementById('subtotal-val').innerText = "Rs. 0";
             document.getElementById('cart-total').innerText = "Rs. 0";
             return;
         }
         let sub = 0;
-        container.innerHTML = cart.map(item => {
+        container.innerHTML = cart.map(item => 
+	{
             sub += item.price;
             return `<div class="flex items-center gap-4 bg-gray-50 p-3 rounded-xl border border-gray-100">
                 <img src="${item.img}" class="w-10 h-14 object-cover rounded-lg">
@@ -734,64 +787,71 @@ function navigateTo(pageId) {
         }).join('');
         document.getElementById('subtotal-val').innerText = "Rs. " + sub;
         document.getElementById('cart-total').innerText = "Rs. " + (sub - appliedDiscount);
-    }
+}
 
-    function removeFromCart(id) { cart = cart.filter(i => i.id !== id); updateCartCount(); renderCart(); }
+function removeFromCart(id) { cart = cart.filter(i => i.id !== id); updateCartCount(); renderCart(); }
 
-    function applyPromo() {
+function applyPromo() 
+{
         const input = document.getElementById('promo-input').value.toUpperCase();
         let sub = cart.reduce((s, i) => s + i.price, 0);
-        if(input === "SIYANEW100" && sub >= 1000) {
+        if(input === "SIYANEW100" && sub >= 1000) 
+	{
             appliedDiscount = 100;
             document.getElementById('promo-row').classList.remove('hidden');
             document.getElementById('discount-val').innerText = "- Rs. 100";
             renderCart();
         } else { alert("Code invalid or min. order ₹1000 not met"); }
-    }
+}
 
 
-function sendWhatsAppOrder() {
+function sendWhatsAppOrder() 
+{
     const n = document.getElementById('cust-name').value;
     const p = document.getElementById('cust-phone').value;
     const a = document.getElementById('cust-address').value;
     
-    // 1. Validation
-    if (!n || !p || !a || cart.length === 0) { 
+	
+	if (!n || !p || !a || cart.length === 0) 
+	{ 
         alert("Please complete Steps 1, 2 & 4 (Payment, Address and Cart)"); 
         return; 
-    }
-// Validation for empty fields and exact 10-digit phone number
-    if (!n || !a || cart.length === 0) { 
+	}
+	
+	if (!n || !a || cart.length === 0) 
+	{ 
         alert("Please fill in your name and address."); 
         return; 
-    }
-    // Check if phone number is exactly 10 digits
-    if (p.length !== 10 || isNaN(p)) {
+	}
+        if (p.length !== 10 || isNaN(p)) 
+	{
         alert("Please enter a valid 10-digit mobile number.");
         return;
-    }
+	}
     // 2. Build the Message
     let sub = cart.reduce((s, i) => s + i.price, 0);
     let fin = sub - (typeof appliedDiscount !== 'undefined' ? appliedDiscount : 0);
     let txt = `*NEW ORDER - SIYA COLLECTION*\n\n*Customer:* ${n}\n*Phone:* ${p}\n*Address:* ${a}\n\n*Items:*`;
-    // Updated loop to include the item image link
-    cart.forEach((i, idx) => {
+     cart.forEach((i, idx) => 
+  {
         txt += `\n${idx+1}. ${i.name} (${i.size}) - Rs.${i.price}`;
-        if (i.img) {
+        if (i.img) 
+	{
             txt += `\n   View Item: ${i.img}`; // This adds the link right under the item name
         }
-    });
+  });
 
     if(appliedDiscount > 0) txt += `\n\n*Promo Applied:* -Rs.100`;
     
     txt += `\n*TOTAL PAID:* Rs.${fin}\n\nSending payment proof now.`;
 
-// 2. Identify the "Go to WhatsApp" button on the Thank You screen
-    const finalBtn = document.getElementById('final-whatsapp-btn');
+	// 2. Identify the "Go to WhatsApp" button on the Thank You screen
+	const finalBtn = document.getElementById('final-whatsapp-btn');
     
-    // 3. Attach the WhatsApp link to that specific button
-    finalBtn.onclick = function() {
-    window.open(`https://wa.me/919834524074?text=${encodeURIComponent(txt)}`, '_blank');
+	// 3. Attach the WhatsApp link to that specific button
+	finalBtn.onclick = function() 
+    {
+	window.open(`https://wa.me/919834524074?text=${encodeURIComponent(txt)}`, '_blank');
         // Clear cart after they actually click to go to WhatsApp
         cart = [];
         document.getElementById('cart-count').innerText = "0";
@@ -800,13 +860,15 @@ function sendWhatsAppOrder() {
 
     // 4. Show the screen (It will stay here until they click the button)
     const thankYou = document.getElementById('thank-you-screen');
-    if (thankYou) {
+    if (thankYou) 
+	{
         thankYou.classList.remove('hidden');
         thankYou.classList.add('flex');
-    }
+	}
 }
 
-    function toggleWishlist(id, e) {
+function toggleWishlist(id, e) 
+{
         if(e) e.stopPropagation();
         let wishlist = JSON.parse(localStorage.getItem('siya_wishlist') || '[]');
         if(wishlist.includes(id)) wishlist = wishlist.filter(x => x !== id);
@@ -815,15 +877,17 @@ function sendWhatsAppOrder() {
         updateWishlistCount();
         renderCatalog();
         renderWishlist();
-    }
+}
 
-    function updateWishlistCount() {
+function updateWishlistCount() 
+{
         const len = JSON.parse(localStorage.getItem('siya_wishlist') || '[]').length;
         document.getElementById('wishlist-count').innerText = len;
         document.getElementById('wishlist-count').classList.toggle('hidden', len === 0);
-    }
+}
 
-function renderWishlist() {
+function renderWishlist() 
+{
     const container = document.getElementById('wishlist-container');
     const wishlistIds = JSON.parse(localStorage.getItem('siya_wishlist') || '[]');
     const wishProducts = products.filter(p => wishlistIds.includes(p.id));
@@ -861,79 +925,90 @@ function renderWishlist() {
 }
 
 
-
-    function toggleMenu(show) {
+function toggleMenu(show) 
+{
         document.getElementById('sidebar').classList.toggle('-translate-x-full', !show);
         document.getElementById('menuOverlay').classList.toggle('hidden', !show);
-    }
+}
 
-    function copyPromoCode(code) {
+function copyPromoCode(code) 
+{
         navigator.clipboard.writeText(code);
         document.getElementById('copyTooltip').classList.remove('opacity-0');
         setTimeout(() => document.getElementById('copyTooltip').classList.add('opacity-0'), 2000);
-    }
+}
 
-    function filterCatalog() {
+function filterCatalog() 
+{
         const term = document.getElementById('catalogSearch').value.toLowerCase();
         renderCatalog(products.filter(p => p.name.toLowerCase().includes(term) || p.desc.toLowerCase().includes(term)));
-    }
+}
 
-    updateWishlistCount();
-    renderCatalog();
+updateWishlistCount();
+renderCatalog();
 
-
-function applyFilters() {
-    // 1. Get current filter values (Removed sort-order reference)
+function applyFilters() 
+{
+    // 1. Get current filter values
     const searchTerm = document.getElementById('catalogSearch').value.toLowerCase();
     const type = document.getElementById('filter-type').value;
-    const priceRange = document.getElementById('filter-price').value;
+    const sizeFilter = document.getElementById('filter-size').value;
 
     // 2. Run the filtering logic
     let filtered = products.filter(p => {
+        // Match Search Term
         const matchesSearch = p.name.toLowerCase().includes(searchTerm) || 
                               p.desc.toLowerCase().includes(searchTerm);
         
+        // Match Category (Saree, Western, Indian)
         const matchesType = (type === 'all') || (p.category === type);
         
-        let matchesPrice = true;
-        if (priceRange !== 'all') {
-            const [min, max] = priceRange.split('-').map(Number);
-            matchesPrice = p.price >= min && p.price <= max;
+        // Match Size
+        let matchesSize = true;
+        if (sizeFilter !== 'all') {
+            // Checks if the product has the selected size AND it is not "OUT OF STOCK"
+            matchesSize = p.sizes.some(s => {
+                const sizeName = s.toUpperCase();
+                return sizeName.includes(sizeFilter) && !sizeName.includes("OUT OF STOCK");
+            });
         }
 
-        return matchesSearch && matchesType && matchesPrice;
+        return matchesSearch && matchesType && matchesSize;
     });
 
     // 3. Update the screen
     renderCatalog(filtered);
 }
 
-
-function openFullscreen(imageSrc) {
+function openFullscreen(imageSrc) 
+{
     const overlay = document.getElementById('image-overlay');
     const fullImg = document.getElementById('fullscreen-img');
     
-    if (overlay && fullImg) {
+    if (overlay && fullImg) 
+	{
         fullImg.src = imageSrc; // Give the zoom layer the image URL
         overlay.classList.remove('hidden'); // Make the layer visible
         
         // IMPORTANT: Prevent the product modal from scrolling in the background
         document.getElementById('product-modal').style.overflow = 'hidden';
-    }
+	}
 }
 
-function closeFullscreen() {
+function closeFullscreen() 
+{
     const overlay = document.getElementById('image-overlay');
-    if (overlay) {
+    if (overlay) 
+	{
         overlay.classList.add('hidden'); // Hide the layer
         
         // Return scrolling back to the product modal
         document.getElementById('product-modal').style.overflow = 'auto';
-    }
+	}
 }
 
-
-function showServiceInfo(element, message) {
+function showServiceInfo(element, message) 
+{
     const tooltip = document.getElementById('service-tooltip');
     const textSpan = document.getElementById('tooltip-text');
     
@@ -951,25 +1026,28 @@ function showServiceInfo(element, message) {
     tooltip.classList.remove('hidden');
     
     // Hide it automatically after 4 seconds
-    setTimeout(() => {
+    setTimeout(() => 
+	{
         tooltip.classList.add('hidden');
-    }, 4000);
+	}, 4000);
 }
 
 // Also hide it if user clicks anywhere else
 window.addEventListener('click', function(e) {
     const tooltip = document.getElementById('service-tooltip');
-    if (!e.target.closest('[onclick^="showServiceInfo"]')) {
+    if (!e.target.closest('[onclick^="showServiceInfo"]')) 
+	{
         tooltip.classList.add('hidden');
-    }
+	}
 });
 
-
-window.onpopstate = function(event) {
+window.onpopstate = function(event) 
+{
         const productModal = document.getElementById('product-modal');
         const imageOverlay = document.getElementById('image-overlay');
 
-        if (imageOverlay && !imageOverlay.classList.contains('hidden')) {
+        if (imageOverlay && !imageOverlay.classList.contains('hidden')) 
+	{
             closeFullscreen();
             history.pushState(null, "", location.href); 
             return;
@@ -986,14 +1064,15 @@ window.onpopstate = function(event) {
             navigateTo('catalog');
             return;
         }
-    };
+};
 
-    window.onload = function() {
-        if (location.hash === "" || location.hash === "#home") {
+window.onload = function() 
+{
+        if (location.hash === "" || location.hash === "#home") 
+	{
             history.replaceState({ page: 'home' }, "", "#home");
         }
-    };
-
+};
 
 </script>
 
@@ -1008,56 +1087,6 @@ window.onpopstate = function(event) {
     };
 </script>
 
-<script>
-    (function() {
-        // Add a fake entry to the history stack
-// Logic to link Mobile Hardware Back Button to the Catalog Page
-(function() {
-    // 1. Push a dummy state into history so there is something to "go back" from
-    function pushInitialState() {
-        window.history.pushState({ page: 'catalog_redirect' }, '');
-    }
-
-    // Initialize the dummy state on load
-    pushInitialState();
-
-    // 2. Listen for the mobile/browser back button click
-    window.addEventListener('popstate', function (event) {
-        // Check if the user is currently NOT on the catalog page
-        // You can use your existing variable that tracks the current page
-        // or check the visibility of the catalog div
-        const catalogPage = document.getElementById('page-catalog');
-        
-        if (catalogPage && catalogPage.classList.contains('hidden')) {
-            // If the catalog is hidden, the user is on Home, About, Cart, etc.
-            // Prevent the default back action and force them to the catalog
-            navigateTo('catalog');
-            
-            // Re-push the state so the back button works again if they are still not on catalog
-            pushInitialState();
-        } else {
-            // If they are already on the catalog, let the back button behave normally 
-            // (e.g., exiting the site or going to the previous site)
-        }
-    });
-})();
-
-
-</script>
-
-<!-- THE ZOOM LAYER: Must be at the very end of your body -->
-<div id="image-overlay" 
-     class="fixed inset-0 bg-black/95 z-[9999] hidden flex flex-col items-center justify-center p-4 cursor-pointer" 
-     onclick="closeFullscreen()">
-    
-    <!-- Close Button -->
-    <div class="absolute top-10 right-10 text-white text-5xl font-light">&times;</div>
-    
-    <!-- The Image Container -->
-    <img id="fullscreen-img" src="" class="max-w-full max-h-[85vh] object-contain shadow-2xl transition-transform duration-300">
-    
-    <p class="mt-8 text-white/50 text-[10px] uppercase tracking-[0.3em]">Tap anywhere to close</p>
-</div>
 
 
 
