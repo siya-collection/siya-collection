@@ -646,10 +646,12 @@ function renderCatalog(filtered = products) {
 
 function openProductModal(productId) {
     const product = products.find(p => p.id === productId);
+    if (!product) return; // Safety check
+
     currentSlideIndex = 0;
     document.getElementById('modal-title').innerText = product.name;
     document.getElementById('modal-price').innerText = "Rs. " + product.price;
-    // Updated modal-desc to include logic for red/grayed out "Out of Stock" sizes
+
     document.getElementById('modal-desc').innerHTML = `
         <p class="text-pink-500 font-bold mb-1 uppercase text-[11px] tracking-widest">${product.desc}</p>
         <p class="text-xs">${product.fullDesc}</p>
@@ -657,12 +659,10 @@ function openProductModal(productId) {
         <select id="modal-size-select" class="w-full mt-4 p-2 border rounded-xl bg-gray-50 text-sm font-bold">
             ${product.sizes.map(s => {
                 const isOut = s.toUpperCase().includes("OUT OF STOCK");
-                // Applies red color and disables the option if it is out of stock[cite: 1]
                 return `<option value="${s}" ${isOut ? 'disabled style="color: #ef4444;"' : ''}>${s}</option>`;
             }).join('')}
         </select>`;
     
-    // Handle Extra Images Slider
     const images = [product.img, ...(product.extraImages || [])];
     totalSlides = images.length;
     document.getElementById('modal-slider-wrapper').innerHTML = images.map(img => 
@@ -673,26 +673,29 @@ function openProductModal(productId) {
                  alt="Dress Image">
         </div>`).join('');
 
-    document.getElementById('modal-thumbnails').innerHTML = images.map((img, i) => `<img src="${img}" onclick="goToSlide(${i})" class="w-14 h-18 object-cover rounded-lg cursor-pointer border-2 border-transparent">`).join('');
+    document.getElementById('modal-thumbnails').innerHTML = images.map((img, i) => 
+        `<img src="${img}" onclick="goToSlide(${i})" class="w-14 h-18 object-cover rounded-lg cursor-pointer border-2 border-transparent">`
+    ).join('');
+    
     updateSliderPosition();
 
-    // Add Button Logic
     document.getElementById('modal-add-btn-final').onclick = () => {
-        const sz = document.getElementById('modal-size-select').value;
         addToCartWithSize(product.name, product.price, product.img, 'modal-size-select', true);
         closeProductModal();
     };
 
-    // WhatsApp Share Logic
     document.getElementById('modal-share-btn').onclick = () => {
         const msg = `Check out this beautiful design from \n *Siya Collection* -\n*${product.name}*\n${product.desc}\nPrice: Rs. ${product.price}\n\n📸 Product Image: ${product.img}\n\n✨ See more designs here: https://www.siyacollection2026.in/`;
         window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
     };
 
+    // --- CRITICAL FIX FOR BACK BUTTON ---
+    // Push a state so the back button closes the modal
+    history.pushState({ action: 'close-modal' }, ""); 
+    
     document.getElementById('product-modal').classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 }
-
 
 function updateSliderPosition() 
 {
@@ -980,19 +983,21 @@ function applyFilters()
     renderCatalog(filtered);
 }
 
-function openFullscreen(imageSrc) 
+function openFullscreen(imgSrc) 
 {
     const overlay = document.getElementById('image-overlay');
-    const fullImg = document.getElementById('fullscreen-img');
-    
-    if (overlay && fullImg) 
-	{
-        fullImg.src = imageSrc; // Give the zoom layer the image URL
-        overlay.classList.remove('hidden'); // Make the layer visible
+    const fullImg = document.getElementById('fullscreen-image');
+    if (overlay && fullImg) {
+        fullImg.src = imgSrc;
+        overlay.classList.remove('hidden');
         
-        // IMPORTANT: Prevent the product modal from scrolling in the background
+        // --- CRITICAL FIX FOR BACK BUTTON ---
+        // Every time an image opens, we add a history entry.
+        // This prevents the "double back button exit" bug.
+        history.pushState({ action: 'close-image' }, "");
+        
         document.getElementById('product-modal').style.overflow = 'hidden';
-	}
+    }
 }
 
 function closeFullscreen() 
@@ -1041,29 +1046,37 @@ window.addEventListener('click', function(e) {
 	}
 });
 
-window.onpopstate = function(event) 
-{
-        const productModal = document.getElementById('product-modal');
-        const imageOverlay = document.getElementById('image-overlay');
+window.onpopstate = function(event) {
+    const productModal = document.getElementById('product-modal');
+    const imageOverlay = document.getElementById('image-overlay');
+    const sideBar = document.getElementById('sidebar');
 
-        if (imageOverlay && !imageOverlay.classList.contains('hidden')) 
-	{
-            closeFullscreen();
-            history.pushState(null, "", location.href); 
-            return;
-        }
+    // 1. Close Sidebar if open
+    if (sideBar && !sideBar.classList.contains('-translate-x-full')) {
+        toggleMenu(false);
+        return;
+    }
 
-        if (productModal && !productModal.classList.contains('hidden')) {
-            closeProductModal();
-            navigateTo('catalog');
-            return;
-        }
+    // 2. Close Fullscreen Image if open
+    if (imageOverlay && !imageOverlay.classList.contains('hidden')) {
+        imageOverlay.classList.add('hidden');
+        return;
+    }
 
-        const homePage = document.getElementById('page-home');
-        if (homePage && !homePage.classList.contains('hidden')) {
-            navigateTo('catalog');
-            return;
-        }
+    // 3. Close Product Modal if open
+    if (productModal && !productModal.classList.contains('hidden')) {
+        productModal.classList.add('hidden');
+        return;
+    }
+
+    // 4. Section Navigation
+    const homePage = document.getElementById('page-home');
+    if (homePage && homePage.classList.contains('hidden')) {
+        navigateTo('catalog');
+    } else {
+        // Only exit if truly on the home screen with no overlays open
+        // history.back(); // Optional: remove this if you want back to always go to catalog
+    }
 };
 
 window.onload = function() 
