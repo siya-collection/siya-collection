@@ -1077,14 +1077,54 @@ window.onload = function()
 </script>
 
 <script>
-    // This pushes the current page into the history stack 
-    // and ensures the 'back' action points to your catalog.
-    window.history.pushState(null, "", window.location.href);        
-    
-    window.onpopstate = function() {
-        // When the back button is pressed, redirect to catalog
-        window.location.href = "catalog.html"; 
-    };
+/**
+ * UNIFIED BACK BUTTON HANDLING
+ * This replaces the conflicting scripts at the bottom of your file.
+ */
+
+// 1. Handle the physical/system back button
+window.onpopstate = function(event) {
+    const productModal = document.getElementById('product-modal');
+    const imageOverlay = document.getElementById('image-overlay');
+    const sideBar = document.getElementById('sidebar');
+
+    // Priority 1: If sidebar menu is open, close it
+    if (sideBar && !sideBar.classList.contains('-translate-x-full')) {
+        toggleMenu(false);
+        history.pushState(null, "", location.href); // Stay on current view
+        return;
+    }
+
+    // Priority 2: If a fullscreen image is open, close it
+    if (imageOverlay && !imageOverlay.classList.contains('hidden')) {
+        closeFullscreen();
+        history.pushState(null, "", location.href); // Prevent page exit
+        return;
+    }
+
+    // Priority 3: If a product popup is open, close it and stay in catalog
+    if (productModal && !productModal.classList.contains('hidden')) {
+        closeProductModal();
+        return; 
+    }
+
+    // Priority 4: Handle Section Navigation
+    // If user is on Cart, About, or Wishlist, take them back to Catalog
+    const homePage = document.getElementById('page-home');
+    if (homePage && homePage.classList.contains('hidden')) {
+        navigateTo('catalog');
+    } else {
+        // If already on Home, let the browser actually go back/exit
+        history.back();
+    }
+};
+
+// 2. Initialize the history state when the page first loads
+window.addEventListener('load', function() {
+    if (location.hash === "" || location.hash === "#home") {
+        history.replaceState({ page: 'home' }, "", "#home");
+    }
+});
 </script>
 
 
