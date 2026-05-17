@@ -123,7 +123,7 @@
                     <div class="bg-pink-500 text-white p-2 rounded-lg"><i class="fa-solid fa-tag text-xs"></i></div>
                     <div>
                         <h2 class="text-xs font-bold text-gray-800">Flat ₹100 Off</h2>
-                        <p class="text-[10px] text-gray-500">On orders above ₹1000</p>
+                        <p class="text-[10px] text-gray-500">On orders above ₹999</p>
                     </div>
                 </div>
                 <button onclick="copyPromoCode('SIYANEW100', this)" class="bg-pink-50 border border-dashed border-pink-300 px-3 py-1.5 rounded-xl transition-all hover:bg-pink-100 cursor-pointer group relative">
@@ -809,13 +809,13 @@ function applyPromo()
 {
         const input = document.getElementById('promo-input').value.toUpperCase();
         let sub = cart.reduce((s, i) => s + i.price, 0);
-        if(input === "SIYASUN200" && sub >= 600) 
+        if(input === "SIYANEW100" && sub >= 999) 
 	{
-            appliedDiscount = 200;
+            appliedDiscount = 100;
             document.getElementById('promo-row').classList.remove('hidden');
-            document.getElementById('discount-val').innerText = "- Rs. 200";
+            document.getElementById('discount-val').innerText = "- Rs. 100";
             renderCart();
-        } else { alert("Code invalid or min. order ₹1000 not met"); }
+        } else { alert("Code invalid or min. order ₹999 not met"); }
 }
 
 
