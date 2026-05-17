@@ -798,9 +798,9 @@ function applyPromo()
 {
         const input = document.getElementById('promo-input').value.toUpperCase();
         let sub = cart.reduce((s, i) => s + i.price, 0);
-        if(input === "SIYANEW100" && sub >= 1000) 
+        if(input === "SIYASUN200" && sub >= 600) 
 	{
-            appliedDiscount = 100;
+            appliedDiscount = 200;
             document.getElementById('promo-row').classList.remove('hidden');
             document.getElementById('discount-val').innerText = "- Rs. 100";
             renderCart();
